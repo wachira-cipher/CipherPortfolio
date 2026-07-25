@@ -1,0 +1,84 @@
+/* ==========================================
+   Header Account Dropdown
+========================================== */
+
+.account-dropdown {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #051117;
+}
+
+.account-dropdown .account-icon {
+    color: inherit;
+    font-size: 1.45rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color .3s ease;
+}
+
+.account-dropdown .account-icon:hover {
+    color: var(--accent-color, #0d6efd);
+}
+
+/* Center the dropdown below the icon */
+.account-dropdown .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+
+    min-width: 180px;
+    padding: .5rem 0;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #051117;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+
+    animation: fadeInDown .2s ease;
+
+    z-index: 1050;
+}
+
+.account-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.account-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+
+    color: #fff;
+    padding: .7rem 1rem;
+    transition: all .25s ease;
+}
+
+.account-dropdown .dropdown-item:hover {
+    background: #0b1b24;
+    color: var(--accent-color, #0d6efd);
+}
+
+.account-dropdown .dropdown-item i {
+    width: 18px;
+    text-align: center;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}

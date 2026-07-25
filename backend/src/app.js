@@ -1,0 +1,168 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+
+// Routes
+import authRoutes from "./routes/authRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
+import serviceRoutes from "./routes/serviceRoutes.js";
+import portfolioRoutes from "./routes/portfolioRoutes.js";
+
+
+// Load environment variables
+dotenv.config();
+
+
+
+const app = express();
+
+
+// ===============================
+// Middleware
+// ===============================
+
+
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL || "http://localhost:5173",
+        credentials: true
+    })
+);
+
+
+
+app.use(
+    express.json()
+);
+
+
+
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
+
+
+
+
+// ===============================
+// API Routes
+// ===============================
+
+
+
+// Authentication
+
+app.use(
+    "/api/auth",
+    authRoutes
+);
+
+
+
+// Profile
+
+app.use(
+    "/api/profile",
+    profileRoutes
+);
+
+
+
+// Services
+
+app.use(
+    "/api/services",
+    serviceRoutes
+);
+
+
+
+// Portfolio
+
+app.use(
+    "/api/portfolio",
+    portfolioRoutes
+);
+
+
+
+
+
+// ===============================
+// Health Check
+// ===============================
+
+
+app.get(
+    "/",
+    (req, res) => {
+
+        res.json({
+            message: "CipherPortfolio API running 🚀"
+        });
+
+    }
+);
+
+
+
+
+
+// ===============================
+// 404 Handler
+// ===============================
+
+
+app.use(
+    (req, res) => {
+
+        res.status(404).json({
+
+            success: false,
+            message: "API endpoint not found"
+
+        });
+
+    }
+);
+
+
+
+
+
+
+// ===============================
+// Global Error Handler
+// ===============================
+
+
+app.use(
+    (err, req, res, next) => {
+
+
+        console.error(err.stack);
+
+
+        res.status(
+            err.status || 500
+        )
+            .json({
+
+                success: false,
+                message:
+                    err.message || "Server Error"
+
+            });
+
+
+    }
+);
+
+
+
+
+
+export default app;

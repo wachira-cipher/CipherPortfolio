@@ -1,0 +1,147 @@
+import { createBrowserRouter } from "react-router-dom";
+
+
+// Layouts
+import PublicLayout from "./layouts/PublicLayout";
+import AuthLayout from "./layouts/AuthLayout";
+
+
+// Public Pages
+import Home from "./components/pages/public/Home";
+import About from "./components/pages/public/About";
+import Resume from "./components/pages/public/Resume";
+import Services from "./components/pages/public/Services";
+import Portfolio from "./components/pages/public/Portfolio";
+import Contact from "./components/pages/public/Contact";
+import PortfolioDetails from "./components/pages/public/PortfolioDetails";
+
+
+// Auth Pages
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import AdminLayout from "./layouts/AdminLayout";
+import Dashboard from "./components/pages/admin/Dashboard";
+// import ForgotPassword from "./auth/pages/ForgotPassword";
+
+
+
+const router = createBrowserRouter([
+
+
+
+    /*
+    ============================
+        PUBLIC WEBSITE
+    ============================
+    */
+
+    {
+        path: "/",
+        element: <PublicLayout />,
+
+        children: [
+
+            {
+                index: true,
+                element: <Home />,
+            },
+
+            {
+                path: "about",
+                element: <About />,
+            },
+
+
+            {
+                path: "resume",
+                element: <Resume />,
+            },
+
+
+            {
+                path: "services",
+                element: <Services />,
+            },
+
+
+            {
+                path: "portfolio-details",
+                element: <PortfolioDetails />,
+            },
+
+
+            {
+                path: "portfolio",
+                element: <Portfolio />,
+            },
+
+
+            {
+                path: "contact",
+                element: <Contact />,
+            },
+
+
+        ],
+    },
+
+
+
+
+
+    /*
+    ============================
+        AUTHENTICATION
+    ============================
+    */
+
+    {
+        path: "/auth",
+        element: <AuthLayout />,
+
+        children: [
+
+            {
+                path: "login",
+                element: <Login />,
+            },
+
+            {
+                path: "register",
+                element: <Register />,
+            },
+
+        ],
+    },
+
+
+    /*
+    ============================
+        404
+    ============================
+    */
+
+
+    // {
+    //     path: "*",
+    //     element: <NotFound />,
+    // },
+
+    {
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+
+            {
+                path: "dashboard",
+                element: <Dashboard />
+            }
+
+        ]
+    }
+
+
+]);
+
+
+export default router;
