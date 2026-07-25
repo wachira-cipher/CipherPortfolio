@@ -356,29 +356,35 @@ export const logoutUser = async (req, res) => {
 // GET PROFILE
 // ===============================
 
+import Profile from "../models/Profile.js";
 
+
+// GET LOGGED IN USER PROFILE
 export const getProfile = async (req, res) => {
-
 
     try {
 
 
-        const user =
-            await User.findById(
-                req.user.id
-            )
-                .select("-password");
+        const profile = await Profile.findOne();
 
 
 
-
-        res.json({
+        res.status(200).json({
 
             success: true,
-            user
+
+            user: {
+                _id: req.user._id,
+                name: req.user.name,
+                email: req.user.email,
+                role: req.user.role,
+                createdAt: req.user.createdAt,
+                updatedAt: req.user.updatedAt
+            },
+
+            profile: profile || null
 
         });
-
 
 
 
@@ -388,12 +394,12 @@ export const getProfile = async (req, res) => {
         res.status(500).json({
 
             success: false,
+
             message: error.message
 
         });
 
 
     }
-
 
 };

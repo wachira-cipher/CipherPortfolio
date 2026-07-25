@@ -1,144 +1,529 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { loginUser, registerUser, getProfile } from "../api/auth.api";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState
+} from "react";
+
+import {
+  loginUser,
+  registerUser,
+  getProfile
+} from "../api/auth.api";
+
+import {
+  updateProfile
+} from "../api/profile.api";
+
+import {
+  toast
+} from "react-toastify";
+
 
 const AuthContext = createContext();
 
+
+
 export function AuthProvider({ children }) {
 
+
   const [user, setUserState] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  const [profile, setProfile] = useState(null);
+
+
+  const [token, setToken] = useState(
+    localStorage.getItem("token")
+  );
+
+
   const [loading, setLoading] = useState(true);
 
-  // ==================================
-  // HYDRATE USER FROM BACKEND (IMPORTANT FIX)
-  // ==================================
 
-  useEffect(() => {
 
-    const initAuth = async () => {
 
-      const savedToken = localStorage.getItem("token");
 
-      if (!savedToken) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await getProfile();
-
-        setUserState(res.data);
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify(res.data)
-        );
-
-      } catch (err) {
-
-        console.error("Auth hydration failed:", err);
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-
-        setUserState(null);
-        setToken(null);
-      }
-
-      setLoading(false);
-    };
-
-    initAuth();
-
-  }, []);
-
-  // ==================================
-  // CENTRALIZED USER UPDATE
-  // ==================================
+  /*
+  ===============================
+  SAVE USER
+  ===============================
+  */
 
   const setUser = (newUser) => {
 
+
     setUserState(newUser);
 
+
     if (newUser) {
+
       localStorage.setItem(
         "user",
         JSON.stringify(newUser)
       );
-    } else {
-      localStorage.removeItem("user");
+
     }
+    else {
+
+      localStorage.removeItem(
+        "user"
+      );
+
+    }
+
   };
 
-  // ==================================
-  // LOGIN
-  // ==================================
+
+
+
+
+
+
+  /*
+  ===============================
+  HYDRATE AUTH
+  ===============================
+  */
+
+  useEffect(() => {
+
+
+    const hydrate = async () => {
+
+
+      const savedToken =
+        localStorage.getItem("token");
+
+
+
+      if (!savedToken) {
+
+        setLoading(false);
+
+        return;
+
+      }
+
+
+
+      try {
+
+
+        const response = await getProfile();
+
+
+
+        console.log(
+          "HYDRATE PROFILE:",
+          response
+        );
+
+
+
+        /*
+        backend returns:
+
+        {
+          success:true,
+          user:{},
+          profile:{}
+        }
+
+        */
+
+
+        setUser(
+          response.user
+        );
+
+
+
+        setProfile(
+          response.profile
+        );
+
+
+
+      }
+      catch (error) {
+
+
+        console.error(
+          "Hydration failed:",
+          error
+        );
+
+
+
+        localStorage.removeItem(
+          "token"
+        );
+
+
+        localStorage.removeItem(
+          "user"
+        );
+
+
+
+        setToken(null);
+
+        setUser(null);
+
+        setProfile(null);
+
+
+      }
+
+
+
+      setLoading(false);
+
+
+    };
+
+
+
+    hydrate();
+
+
+  }, []);
+
+
+
+
+
+
+
+
+
+  /*
+  ===============================
+  LOGIN
+  ===============================
+  */
+
 
   const login = async (formData) => {
 
-    const response = await loginUser(formData);
 
-    const { user, token } = response;
+    const response =
+      await loginUser(formData);
 
-    localStorage.setItem("token", token);
+
+
+    const {
+      user,
+      token
+    } = response;
+
+
+
+
+    localStorage.setItem(
+      "token",
+      token
+    );
+
+
 
     setToken(token);
 
+
+
     setUser(user);
+
+
+
+
+    /*
+    Immediately load profile
+    */
+
+    try {
+
+
+      const profileResponse =
+        await getProfile();
+
+
+
+      setProfile(
+        profileResponse.profile
+      );
+
+
+    }
+    catch (error) {
+
+
+      console.error(
+        "Profile loading after login failed",
+        error
+      );
+
+
+    }
+
+
+
 
     return {
       user,
       token
     };
 
+
   };
 
-  // ==================================
-  // REGISTER
-  // ==================================
+
+
+
+
+
+
+
+
+  /*
+  ===============================
+  REGISTER
+  ===============================
+  */
+
 
   const register = async (formData) => {
-    const response = await registerUser(formData);
-    return response.data;
+
+
+    const response =
+      await registerUser(formData);
+
+
+
+    return response;
+
+
   };
 
-  // ==================================
-  // LOGOUT
-  // ==================================
+
+
+
+
+
+
+
+
+  /*
+  ===============================
+  UPDATE PROFILE
+  ===============================
+  */
+  const updateProfileState = async (updatedProfile) => {
+
+    try {
+
+      const response = await updateProfile(updatedProfile);
+
+
+      console.log(
+        "UPDATE RESPONSE:",
+        response.data
+      );
+
+
+      const newProfile = response.data.profile;
+
+
+
+      if (!newProfile) {
+
+        throw new Error(
+          "Profile update returned empty profile"
+        );
+
+      }
+
+
+
+      setProfile(newProfile);
+
+
+
+      setUserState(prev => ({
+        ...prev,
+        name: newProfile.name,
+        email: newProfile.email
+      }));
+
+
+
+      toast.success(
+        "Profile updated successfully"
+      );
+
+
+
+      return newProfile;
+
+
+    } catch (error) {
+
+
+      toast.error(
+        "Profile update failed"
+      );
+
+
+      console.error(
+        "Update profile error:",
+        error
+      );
+
+
+      throw error;
+
+    }
+
+  };
+
+
+
+
+
+
+
+
+
+
+  /*
+  ===============================
+  REFRESH PROFILE
+  ===============================
+  */
+
+
+  const refreshProfile = async () => {
+
+
+    const response =
+      await getProfile();
+
+
+
+    setProfile(
+      response.profile
+    );
+
+
+
+    return response.profile;
+
+
+  };
+
+
+
+
+
+
+
+
+
+  /*
+  ===============================
+  LOGOUT
+  ===============================
+  */
+
 
   const logout = () => {
 
-    console.log("Before:", localStorage.getItem("token"));
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem(
+      "token"
+    );
 
-    console.log("After:", localStorage.getItem("token"));
+
+    localStorage.removeItem(
+      "user"
+    );
+
+
 
     setToken(null);
+
     setUser(null);
 
-    window.location.replace("/auth/login");
+    setProfile(null);
+
+
+
+    window.location.replace(
+      "/auth/login"
+    );
+
+
   };
 
+
+
+
+
+
+
   return (
+
     <AuthContext.Provider
+
       value={{
+
         user,
+
         setUser,
+
+        profile,
+
+        setProfile,
+
         token,
+
         loading,
+
         login,
+
         register,
+
         logout,
-        isAuthenticated: !!token,
+
+        updateProfileState,
+
+        refreshProfile,
+
+
+        isAuthenticated:
+          !!token
+
       }}
+
     >
+
+
       {children}
+
+
     </AuthContext.Provider>
+
   );
+
+
 }
 
+
+
+
+
+
 export function useAuth() {
+
   return useContext(AuthContext);
+
 }
