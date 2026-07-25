@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../../../../context/AuthContext"; // adjust path
+import { Link } from "react-router-dom";
+import { getImageUrl } from "../../../../utils/imageUrl";
 
 
 const UserDropdown = () => {
@@ -10,7 +12,7 @@ const UserDropdown = () => {
     const dropdownRef = useRef(null);
 
 
-    const { logout, user } = useAuth();
+    const { logout, user, profile } = useAuth();
 
 
 
@@ -89,7 +91,11 @@ const UserDropdown = () => {
 
                 <img
                     className="rounded-circle header-profile-user"
-                    src="/assets/auth/images/users/avatar-4.jpg"
+                    src={
+                        getImageUrl(
+                            profile?.image || user?.image
+                        )
+                    }
                     alt="Header Avatar"
                 />
 
@@ -97,7 +103,7 @@ const UserDropdown = () => {
 
                 <span className="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
 
-                    {user?.name || "Marcus"}
+                    {user?.name || "Tyson"}
 
                 </span>
 
@@ -122,9 +128,10 @@ const UserDropdown = () => {
 
 
 
-                <a
+                <Link
                     className="dropdown-item"
-                    href="#"
+                    to="/admin/profile"
+                    onClick={() => setOpen(false)}
                 >
 
                     <i className="bi bi-person-circle font-size-18 align-middle text-muted me-1"></i>
@@ -133,49 +140,13 @@ const UserDropdown = () => {
                         View Profile
                     </span>
 
-
-                </a>
-
-
-
-
-
-                <a
-                    className="dropdown-item"
-                    href="#"
-                >
-
-                    <i className="bi bi-wallet2 font-size-18 align-middle text-muted me-1"></i>
-
-                    <span className="align-middle">
-                        My Wallet
-                    </span>
-
-
-                </a>
+                </Link>
 
 
 
 
 
-                <a
-                    className="dropdown-item"
-                    href="#"
-                >
 
-                    <i className="bi bi-gear font-size-18 align-middle text-muted me-1"></i>
-
-                    <span className="align-middle">
-                        Settings
-                    </span>
-
-
-                    <span className="badge bg-success-subtle text-success rounded-pill mt-1 ms-2">
-                        03
-                    </span>
-
-
-                </a>
 
 
 

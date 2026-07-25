@@ -22,6 +22,7 @@ import Register from "./components/auth/Register";
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./components/pages/admin/Dashboard";
 // import ForgotPassword from "./auth/pages/ForgotPassword";
+import Profile from "./components/pages/admin/profile/Profile";
 
 
 
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
             {
                 path: "dashboard",
                 element: <Dashboard />
+            },
+            {
+                path: "profile",
+                element: <Profile />
             }
 
         ]

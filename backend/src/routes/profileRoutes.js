@@ -1,14 +1,12 @@
 import express from "express";
+import upload from "../middleware/upload.js";
 
 import {
-
     getProfile,
     createProfile,
     updateProfile,
     deleteProfile
-
 } from "../controllers/profileController.js";
-
 
 import { protect } from "../middleware/authMiddleware.js";
 import { admin } from "../middleware/adminMiddleware.js";
@@ -20,6 +18,7 @@ const router = express.Router();
 
 router.get(
     "/",
+    protect,
     getProfile
 );
 
@@ -38,6 +37,7 @@ router.put(
     "/",
     protect,
     admin,
+    upload.single("image"),
     updateProfile
 );
 

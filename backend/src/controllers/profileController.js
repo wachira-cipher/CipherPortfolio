@@ -6,19 +6,32 @@ export const getProfile = async (req, res) => {
 
     try {
 
-        const profile = await Profile.findOne();
+
+        const profile =
+            await Profile.findOne();
+
+
 
         res.status(200).json({
+
             success: true,
+
+            user: req.user,
+
             profile
+
         });
 
 
-    } catch (error) {
+    }
+    catch (error) {
 
         res.status(500).json({
+
             success: false,
+
             message: error.message
+
         });
 
     }
@@ -74,50 +87,116 @@ export const createProfile = async (req, res) => {
 };
 
 
-
-
-// UPDATE PROFILE
+//update
 
 export const updateProfile = async (req, res) => {
-
 
     try {
 
 
-        const profile = await Profile.findOneAndUpdate(
+        let updateData = {
+            ...req.body
+        };
 
-            {},
-            req.body,
-            {
-                new: true,
-                runValidators: true
-            }
 
-        );
+        if (req.file) {
+
+            updateData.image =
+                `/uploads/${req.file.filename}`;
+
+        }
+
+
+
+        if (typeof updateData.socialLinks === "string") {
+
+            updateData.socialLinks =
+                JSON.parse(updateData.socialLinks);
+
+        }
+
+
+
+        updateData.socialLinks = {
+
+            github: "",
+            linkedin: "",
+            twitter: "",
+            website: "",
+
+            ...(updateData.socialLinks || {})
+
+        };
+
+
+
+        let profile =
+            await Profile.findOne();
+
+
+
+        if (!profile) {
+
+
+            profile =
+                await Profile.create(
+                    updateData
+                );
+
+
+        }
+        else {
+
+
+            profile =
+                await Profile.findByIdAndUpdate(
+
+                    profile._id,
+
+                    updateData,
+
+                    {
+                        new: true,
+                        runValidators: true
+                    }
+
+                );
+
+
+        }
+
 
 
         res.status(200).json({
 
             success: true,
+
             profile
 
         });
 
 
 
-    } catch (error) {
+    }
+    catch (error) {
+
+
+        console.error(
+            "PROFILE UPDATE ERROR:",
+            error
+        );
 
 
         res.status(500).json({
 
             success: false,
+
             message: error.message
 
         });
 
 
     }
-
 
 };
 

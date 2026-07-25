@@ -34,7 +34,7 @@ export const getProfile = async () => {
         "/auth/profile"
     );
 
-    return response.data.user;
+    return response.data;
 
 };
 
