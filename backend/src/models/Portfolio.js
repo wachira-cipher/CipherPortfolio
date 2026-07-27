@@ -2,23 +2,28 @@ import mongoose from "mongoose";
 
 
 const portfolioSchema = new mongoose.Schema(
+
     {
 
         title: {
             type: String,
-            required: true
+            required: true,
+            trim: true
         },
 
 
         category: {
             type: String,
             enum: [
-                "Strategy",
-                "Finance",
-                "Operations",
-                "Technology"
+                "Web Development",
+                "Mobile Development",
+                "Backend",
+                "API",
+                "UI/UX",
+                "DevOps",
+                "AI"
             ],
-            default: "Technology"
+            default: "Web Development"
         },
 
 
@@ -60,6 +65,12 @@ const portfolioSchema = new mongoose.Schema(
         },
 
 
+        github: {
+            type: String,
+            default: ""
+        },
+
+
         features: [
             {
                 type: String
@@ -82,15 +93,23 @@ const portfolioSchema = new mongoose.Schema(
         isFeatured: {
             type: Boolean,
             default: false
+        },
+
+
+        status: {
+            type: Boolean,
+            default: true
         }
 
 
     },
+
     {
         timestamps: true
     }
-);
 
+
+);
 
 
 export default mongoose.model(

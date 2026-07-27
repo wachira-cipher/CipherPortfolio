@@ -168,7 +168,7 @@ export default function Header() {
                             <li>
                                 <a
                                     className="dropdown-item"
-                                    href="/login"
+                                    href="/auth/login"
                                 >
                                     <i className="bi bi-box-arrow-in-right"></i>
                                     Login
@@ -178,7 +178,7 @@ export default function Header() {
                             <li>
                                 <a
                                     className="dropdown-item"
-                                    href="/register"
+                                    href="/auth/register"
                                 >
                                     <i className="bi bi-person-plus"></i>
                                     Sign Up
@@ -193,7 +193,7 @@ export default function Header() {
 
                 <div className="header-social-links">
 
-                    ...
+
 
                 </div>
 
