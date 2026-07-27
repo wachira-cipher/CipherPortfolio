@@ -11,6 +11,7 @@ import Home from "./components/pages/public/Home";
 import About from "./components/pages/public/About";
 import Resume from "./components/pages/public/Resume";
 import Services from "./components/pages/public/Services";
+import ServiceDetails from "./components/pages/public/ServiceDetails";
 import Portfolio from "./components/pages/public/Portfolio";
 import Contact from "./components/pages/public/Contact";
 import PortfolioDetails from "./components/pages/public/PortfolioDetails";
@@ -23,6 +24,11 @@ import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./components/pages/admin/Dashboard";
 // import ForgotPassword from "./auth/pages/ForgotPassword";
 import Profile from "./components/pages/admin/profile/Profile";
+
+import AllPortfolios from "./components/pages/admin/portfolio/AllPortfolios";
+import CreatePortfolio from "./components/pages/admin/portfolio/CreatePortfolio";
+import EditPortfolio from "./components/pages/admin/portfolio/EditPortfolio";
+import ViewPortfolio from "./components/pages/admin/portfolio/ViewPortfolio";
 
 
 
@@ -62,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path: "services",
                 element: <Services />,
+            },
+            {
+                path: "service-details",
+                element: <ServiceDetails />,
             },
 
 
@@ -140,7 +150,34 @@ const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <Profile />
+            },
+            {
+                path: "portfolio",
+                children: [
+
+                    {
+                        path: "",
+                        element: <AllPortfolios />
+                    },
+
+                    {
+                        path: "create",
+                        element: <CreatePortfolio />
+                    },
+
+                    {
+                        path: ":id/edit",
+                        element: <EditPortfolio />
+                    },
+
+                    {
+                        path: ":id",
+                        element: <ViewPortfolio />
+                    }
+
+                ]
             }
+
 
         ]
     }

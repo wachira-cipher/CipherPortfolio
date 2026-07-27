@@ -111,41 +111,18 @@ const SidebarMenu = () => {
 
 
                 <MenuItem
-                    icon="uil-store"
-                    title="Ecommerce"
+                    icon="bi-briefcase"
+                    title="Portfolio"
                     hasArrow
                     children={[
                         {
-                            title: "Products",
-                            link: "ecommerce-products.html"
+                            title: "Portfolios",
+                            link: "/admin/portfolio"
                         },
+
                         {
-                            title: "Product Detail",
-                            link: "ecommerce-product-detail.html"
-                        },
-                        {
-                            title: "Orders",
-                            link: "ecommerce-orders.html"
-                        },
-                        {
-                            title: "Customers",
-                            link: "ecommerce-customers.html"
-                        },
-                        {
-                            title: "Cart",
-                            link: "ecommerce-cart.html"
-                        },
-                        {
-                            title: "Checkout",
-                            link: "ecommerce-checkout.html"
-                        },
-                        {
-                            title: "Shops",
-                            link: "ecommerce-shops.html"
-                        },
-                        {
-                            title: "Add Product",
-                            link: "ecommerce-add-product.html"
+                            title: "Add Portfolio",
+                            link: "/admin/portfolio/create"
                         }
                     ]}
                 />

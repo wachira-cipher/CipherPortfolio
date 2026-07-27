@@ -4,6 +4,8 @@ import Header from "../components/pages/admin/Header";
 import Footer from "../components/pages/admin/Footer";
 import LeftSidebar from "../components/pages/admin/LeftSidebar";
 import RightSidebar from "../components/pages/admin/RightSidebar";
+import BreadcrumbStyle from "./../utils/BreadcrumbStyle";
+
 
 import AdminAssets from "../utils/AdminAssets";
 
@@ -129,7 +131,7 @@ const AdminLayout = () => {
     return (
 
         <>
-
+            <BreadcrumbStyle />
             <AdminAssets />
 
 
