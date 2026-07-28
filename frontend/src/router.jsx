@@ -30,6 +30,12 @@ import CreatePortfolio from "./components/pages/admin/portfolio/CreatePortfolio"
 import EditPortfolio from "./components/pages/admin/portfolio/EditPortfolio";
 import ViewPortfolio from "./components/pages/admin/portfolio/ViewPortfolio";
 
+// Skill Pages
+import AllSkills from "./components/pages/admin/skill/AllSkills";
+import CreateSkill from "./components/pages/admin/skill/CreateSkill";
+import EditSkill from "./components/pages/admin/skill/EditSkill";
+import ViewSkill from "./components/pages/admin/skill/ViewSkill";
+
 
 
 const router = createBrowserRouter([
@@ -173,6 +179,35 @@ const router = createBrowserRouter([
                     {
                         path: ":id",
                         element: <ViewPortfolio />
+                    }
+
+                ]
+            },
+            {
+                path: "skill",
+                children: [
+
+                    {
+                        path: "",
+                        element: <AllSkills />
+                    },
+
+
+                    {
+                        path: "create",
+                        element: <CreateSkill />
+                    },
+
+
+                    {
+                        path: ":id/edit",
+                        element: <EditSkill />
+                    },
+
+
+                    {
+                        path: ":id",
+                        element: <ViewSkill />
                     }
 
                 ]
