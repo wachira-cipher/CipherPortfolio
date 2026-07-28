@@ -11,6 +11,7 @@ import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
+import skillRoutes from "./routes/skillRoutes.js";
 
 
 // Load environment variables
@@ -94,6 +95,13 @@ app.use(
 app.use(
     "/api/portfolio",
     portfolioRoutes
+);
+
+
+
+app.use(
+    "/api/skill",
+    skillRoutes
 );
 
 

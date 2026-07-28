@@ -25,88 +25,13 @@ const SidebarMenu = () => {
                 />
 
 
-                <MenuItem
-                    icon="uil-window-section"
-                    title="Layouts"
-                    hasArrow
-                    children={[
-                        {
-                            title: "Vertical",
-                            children: [
-                                {
-                                    title: "Dark Sidebar",
-                                    link: "layouts-dark-sidebar.html"
-                                },
-                                {
-                                    title: "Compact Sidebar",
-                                    link: "layouts-compact-sidebar.html"
-                                },
-                                {
-                                    title: "Icon Sidebar",
-                                    link: "layouts-icon-sidebar.html"
-                                },
-                                {
-                                    title: "Boxed Width",
-                                    link: "layouts-boxed.html"
-                                },
-                                {
-                                    title: "Preloader",
-                                    link: "layouts-preloader.html"
-                                },
-                                {
-                                    title: "Colored Sidebar",
-                                    link: "layouts-colored-sidebar.html"
-                                }
-                            ]
-                        },
 
-                        {
-                            title: "Horizontal",
-                            children: [
-                                {
-                                    title: "Horizontal",
-                                    link: "layouts-horizontal.html"
-                                },
-                                {
-                                    title: "Topbar Dark",
-                                    link: "layouts-hori-topbar-dark.html"
-                                },
-                                {
-                                    title: "Boxed Width",
-                                    link: "layouts-hori-boxed-width.html"
-                                },
-                                {
-                                    title: "Preloader",
-                                    link: "layouts-hori-preloader.html"
-                                }
-                            ]
-                        }
-                    ]}
-                />
 
 
                 <MenuSection title="Apps" />
 
 
-                <MenuItem
-                    icon="uil-calender"
-                    title="Calendar"
-                    link="calendar.html"
-                />
 
-
-                <MenuItem
-                    icon="uil-comments-alt"
-                    title="Chat"
-                    link="chat.html"
-                />
-
-
-                <MenuItem
-                    icon="uil-comments-alt"
-                    title="File Manager"
-                    link="file-manager.html"
-                />
 
 
 
@@ -148,17 +73,17 @@ const SidebarMenu = () => {
 
 
                 <MenuItem
-                    icon="uil-invoice"
-                    title="Invoices"
+                    icon="bi bi-code-slash"
+                    title="Skills"
                     hasArrow
                     children={[
                         {
-                            title: "Invoice List",
-                            link: "invoices-list.html"
+                            title: "All Skills",
+                            link: "/admin/skill"
                         },
                         {
-                            title: "Invoice Detail",
-                            link: "invoices-detail.html"
+                            title: "Add Skill",
+                            link: "/admin/skill/create"
                         }
                     ]}
                 />
@@ -167,21 +92,18 @@ const SidebarMenu = () => {
 
                 <MenuItem
                     icon="uil-book-alt"
-                    title="Contacts"
+                    title="Services"
                     hasArrow
                     children={[
                         {
-                            title: "User Grid",
-                            link: "contacts-grid.html"
+                            title: "Services",
+                            link: "Add service"
                         },
                         {
                             title: "User List",
                             link: "contacts-list.html"
                         },
-                        {
-                            title: "Profile",
-                            link: "contacts-profile.html"
-                        }
+
                     ]}
                 />
 
@@ -215,79 +137,7 @@ const SidebarMenu = () => {
                 />
 
 
-                <MenuItem
-                    icon="uil-file-alt"
-                    title="Utility"
-                    hasArrow
-                    children={[
-                        {
-                            title: "Starter Page",
-                            link: "pages-starter.html"
-                        },
-                        {
-                            title: "Maintenance",
-                            link: "pages-maintenance.html"
-                        },
-                        {
-                            title: "Coming Soon",
-                            link: "pages-comingsoon.html"
-                        },
-                        {
-                            title: "Timeline",
-                            link: "pages-timeline.html"
-                        },
-                        {
-                            title: "FAQs",
-                            link: "pages-faqs.html"
-                        },
-                        {
-                            title: "Pricing",
-                            link: "pages-pricing.html"
-                        },
-                        {
-                            title: "Error 404",
-                            link: "pages-404.html"
-                        },
-                        {
-                            title: "Error 500",
-                            link: "pages-500.html"
-                        }
-                    ]}
-                />
 
-
-
-                <MenuSection title="Components" />
-
-
-
-                <MenuItem
-                    icon="uil-flask"
-                    title="UI Elements"
-                    hasArrow
-                    children={[
-                        {
-                            title: "Alerts",
-                            link: "ui-alerts.html"
-                        },
-                        {
-                            title: "Buttons",
-                            link: "ui-buttons.html"
-                        },
-                        {
-                            title: "Cards",
-                            link: "ui-cards.html"
-                        },
-                        {
-                            title: "Carousel",
-                            link: "ui-carousel.html"
-                        },
-                        {
-                            title: "Dropdowns",
-                            link: "ui-dropdowns.html"
-                        }
-                    ]}
-                />
 
 
             </ul>

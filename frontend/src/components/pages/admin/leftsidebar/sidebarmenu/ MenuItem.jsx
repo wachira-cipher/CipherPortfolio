@@ -1,3 +1,7 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+
 const MenuItem = ({
     icon,
     title,
@@ -17,66 +21,133 @@ const MenuItem = ({
         <li>
 
 
-            <a
-                href={hasChildren ? "#" : link}
-                className={
-                    hasChildren
-                        ? "has-arrow waves-effect d-flex align-items-center"
-                        : "waves-effect d-flex align-items-center"
-                }
-            >
+            {
+                hasChildren ?
 
 
-                {icon && (
-                    <i className={icon}></i>
-                )}
+                    (
+                        <a
+                            href="#"
+                            className="has-arrow waves-effect d-flex align-items-center"
+                        >
 
 
-                <span>
-                    {title}
-                </span>
+                            {
+                                icon && (
+
+                                    <i className={icon}></i>
+
+                                )
+                            }
 
 
-                {badge && (
-                    <span
-                        className={`badge rounded-pill ${badgeClass} float-end`}
+
+                            <span>
+                                {title}
+                            </span>
+
+
+
+                            {
+                                badge && (
+
+                                    <span
+                                        className={`badge rounded-pill ${badgeClass} float-end`}
+                                    >
+                                        {badge}
+                                    </span>
+
+                                )
+                            }
+
+
+
+                            <i className="bi bi-chevron-right menu-arrow"></i>
+
+
+
+                        </a>
+                    )
+
+
+                    :
+
+
+                    (
+
+                        <Link
+                            to={link}
+                            className="waves-effect d-flex align-items-center"
+                        >
+
+
+                            {
+                                icon && (
+
+                                    <i className={icon}></i>
+
+                                )
+                            }
+
+
+
+                            <span>
+                                {title}
+                            </span>
+
+
+
+                            {
+                                badge && (
+
+                                    <span
+                                        className={`badge rounded-pill ${badgeClass} float-end`}
+                                    >
+                                        {badge}
+                                    </span>
+
+                                )
+                            }
+
+
+                        </Link>
+
+                    )
+
+            }
+
+
+
+
+
+
+
+
+            {
+                hasChildren && (
+
+                    <ul
+                        className="sub-menu"
+                        aria-expanded="false"
                     >
-                        {badge}
-                    </span>
-                )}
+
+                        {
+                            children.map((item, index) => (
+
+                                <MenuItem
+                                    key={index}
+                                    {...item}
+                                />
+
+                            ))
+                        }
 
 
-                {hasChildren && (
-                    <i className="bi bi-chevron-right menu-arrow"></i>
-                )}
+                    </ul>
 
+                )
+            }
 
-            </a>
-
-
-
-
-
-            {hasChildren && (
-
-                <ul
-                    className="sub-menu"
-                    aria-expanded="false"
-                >
-
-                    {children.map((item, index) => (
-
-                        <MenuItem
-                            key={index}
-                            {...item}
-                        />
-
-                    ))}
-
-
-                </ul>
-
-            )}
 
 
         </li>
