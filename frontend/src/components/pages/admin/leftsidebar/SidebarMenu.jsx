@@ -93,6 +93,23 @@ const SidebarMenu = () => {
                     ]}
                 />
 
+                <MenuItem
+                    icon="bi bi-file-earmark-text"
+                    title="Resume"
+                    hasArrow
+                    children={[
+                        {
+                            title: "View Resume",
+                            link: "/admin/resume"
+                        },
+                        {
+                            title: "Add Resume",
+                            link: "/admin/resume/create"
+                        },
+
+                    ]}
+                />
+
 
 
                 <MenuSection title="Pages" />

@@ -12,6 +12,7 @@ import profileRoutes from "./routes/profileRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js";
+import resumeRoutes from "./routes/resumeRoutes.js"
 
 
 
@@ -105,7 +106,10 @@ app.use(
     skillRoutes
 );
 
-
+app.use(
+    "/api/resume",
+    resumeRoutes
+);
 
 
 

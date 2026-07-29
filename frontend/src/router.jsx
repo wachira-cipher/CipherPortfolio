@@ -40,6 +40,9 @@ import AllServices from "./components/pages/admin/service/AllServices";
 import CreateService from "./components/pages/admin/service/CreateService";
 import EditService from "./components/pages/admin/service/EditService";
 import ViewService from "./components/pages/admin/service/ViewService";
+import CreateResume from "./components/pages/admin/resume/CreateResume";
+import ViewResume from "./components/pages/admin/resume/ViewResume";
+import EditResume from "./components/pages/admin/resume/EditResume";
 
 
 
@@ -241,6 +244,52 @@ const router = createBrowserRouter([
                         path: ":id",
                         element: <ViewService />
                     }
+
+                ]
+            },
+            {
+                path: "resume",
+                children: [
+
+                    /*
+                    ==========================
+                        VIEW RESUME
+                    ==========================
+                    */
+
+                    {
+                        path: "",
+                        element: <ViewResume />
+                    },
+
+
+
+                    /*
+                    ==========================
+                        CREATE RESUME
+                    ==========================
+                    */
+
+                    {
+                        path: "create",
+                        element: <CreateResume />
+                    },
+
+
+
+                    /*
+                    ==========================
+                        EDIT RESUME
+                        Later
+                    ==========================
+                    */
+
+
+                    {
+                        path: "edit",
+                        element: <EditResume />
+                    }
+
 
                 ]
             },
