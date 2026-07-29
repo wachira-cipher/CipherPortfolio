@@ -110,7 +110,22 @@ const SidebarMenu = () => {
                     ]}
                 />
 
+                <MenuItem
+                    icon="bi bi-chat-quote"
+                    title="Testimonials"
+                    hasArrow
+                    children={[
+                        {
+                            title: "Testimonials",
+                            link: "/admin/testimonial"
+                        },
+                        {
+                            title: "Add Testimonial",
+                            link: "/admin/testimonial/create"
+                        },
 
+                    ]}
+                />
 
                 <MenuSection title="Pages" />
 
