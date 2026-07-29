@@ -44,7 +44,10 @@ import CreateResume from "./components/pages/admin/resume/CreateResume";
 import ViewResume from "./components/pages/admin/resume/ViewResume";
 import EditResume from "./components/pages/admin/resume/EditResume";
 
-
+import CreateTestimonial from "./components/pages/admin/testimonial/CreateTestimonial";
+import AllTestimonials from "./components/pages/admin/testimonial/AllTestimonials";
+import ViewTestimonial from "./components/pages/admin/testimonial/ViewTestimonial";
+import EditTestimonial from "./components/pages/admin/testimonial/EditTestimonial";
 
 const router = createBrowserRouter([
 
@@ -290,6 +293,44 @@ const router = createBrowserRouter([
                         element: <EditResume />
                     }
 
+
+                ]
+            },
+            {
+                path: "testimonial",
+
+                children: [
+
+                    {
+                        path: "",
+
+                        element: <AllTestimonials />
+
+                    },
+
+
+                    {
+                        path: "create",
+
+                        element: <CreateTestimonial />
+
+                    },
+
+
+                    {
+                        path: ":id/edit",
+
+                        element: <EditTestimonial />
+
+                    },
+
+
+                    {
+                        path: ":id",
+
+                        element: <ViewTestimonial />
+
+                    }
 
                 ]
             },
