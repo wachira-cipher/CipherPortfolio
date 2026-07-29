@@ -1,25 +1,56 @@
 import express from "express";
+import upload from "../middleware/upload.js";
 
 
 import {
 
-    getServices,
-    getService,
     createService,
+
+    getServices,
+
+    getServiceById,
+
     updateService,
-    deleteService
+
+    deleteService,
+
+    getFeaturedServices,
+
+    getServicesByCategory,
+    deleteServiceImage
+
 
 } from "../controllers/serviceController.js";
-
-
-import { protect } from "../middleware/authMiddleware.js";
-import { admin } from "../middleware/adminMiddleware.js";
 
 
 
 const router = express.Router();
 
 
+
+
+
+/*
+========================================
+CREATE SERVICE
+========================================
+*/
+
+router.post(
+    "/",
+    upload.array("images", 5),
+    createService
+);
+
+
+
+
+
+/*
+========================================
+GET ALL SERVICES
+========================================
+*/
 
 router.get(
     "/",
@@ -28,37 +59,95 @@ router.get(
 
 
 
+
+
+
+/*
+========================================
+FEATURED SERVICES
+========================================
+*/
+
 router.get(
-    "/:id",
-    getService
+    "/featured",
+    getFeaturedServices
 );
 
 
 
-router.post(
-    "/",
-    protect,
-    admin,
-    createService
+
+
+
+
+/*
+========================================
+CATEGORY SERVICES
+========================================
+*/
+
+router.get(
+    "/category/:category",
+    getServicesByCategory
 );
 
 
 
-router.put(
+/*
+========================================
+DELETE SERVICE
+========================================
+*/
+
+router.delete(
     "/:id",
-    protect,
-    admin,
-    updateService
+    deleteService
 );
 
 
 
 router.delete(
-    "/:id",
-    protect,
-    admin,
-    deleteService
+    "/:id/image",
+    deleteServiceImage
 );
+
+
+
+/*
+========================================
+SINGLE SERVICE
+========================================
+*/
+
+router.get(
+    "/:id",
+    getServiceById
+);
+
+
+
+
+
+
+
+
+/*
+========================================
+UPDATE SERVICE
+========================================
+*/
+
+router.put(
+    "/:id",
+    upload.array("images", 5),
+    updateService
+);
+
+
+
+
+
+
+
 
 
 
