@@ -36,6 +36,11 @@ import CreateSkill from "./components/pages/admin/skill/CreateSkill";
 import EditSkill from "./components/pages/admin/skill/EditSkill";
 import ViewSkill from "./components/pages/admin/skill/ViewSkill";
 
+import AllServices from "./components/pages/admin/service/AllServices";
+import CreateService from "./components/pages/admin/service/CreateService";
+import EditService from "./components/pages/admin/service/EditService";
+import ViewService from "./components/pages/admin/service/ViewService";
+
 
 
 const router = createBrowserRouter([
@@ -211,7 +216,34 @@ const router = createBrowserRouter([
                     }
 
                 ]
-            }
+            },
+
+            {
+                path: "service",
+                children: [
+
+                    {
+                        path: "",
+                        element: <AllServices />
+                    },
+
+                    {
+                        path: "create",
+                        element: <CreateService />
+                    },
+
+                    {
+                        path: ":id/edit",
+                        element: <EditService />
+                    },
+
+                    {
+                        path: ":id",
+                        element: <ViewService />
+                    }
+
+                ]
+            },
 
 
         ]

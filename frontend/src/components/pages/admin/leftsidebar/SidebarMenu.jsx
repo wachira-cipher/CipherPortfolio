@@ -54,21 +54,7 @@ const SidebarMenu = () => {
 
 
 
-                <MenuItem
-                    icon="uil-envelope"
-                    title="Email"
-                    hasArrow
-                    children={[
-                        {
-                            title: "Inbox",
-                            link: "email-inbox.html"
-                        },
-                        {
-                            title: "Read Email",
-                            link: "email-read.html"
-                        }
-                    ]}
-                />
+
 
 
 
@@ -91,17 +77,17 @@ const SidebarMenu = () => {
 
 
                 <MenuItem
-                    icon="uil-book-alt"
+                    icon="bi bi-layers"
                     title="Services"
                     hasArrow
                     children={[
                         {
-                            title: "Services",
-                            link: "Add service"
+                            title: "All Services",
+                            link: "/admin/service"
                         },
                         {
-                            title: "User List",
-                            link: "contacts-list.html"
+                            title: "Add Service",
+                            link: "/admin/service/create"
                         },
 
                     ]}
