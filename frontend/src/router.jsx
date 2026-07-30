@@ -51,6 +51,12 @@ import EditTestimonial from "./components/pages/admin/testimonial/EditTestimonia
 import AllContacts from "./components/pages/admin/contact/AllContacts";
 import ViewContact from "./components/pages/admin/contact/ViewContact";
 
+import CreateStat from "./components/pages/admin/stat/Createstat";
+import AllStats from "./components/pages/admin/stat/AllStats";
+import EditStat from "./components/pages/admin/stat/EditStat";
+import ViewStat from "./components/pages/admin/stat/ViewStat";
+
+
 const router = createBrowserRouter([
 
 
@@ -357,6 +363,44 @@ const router = createBrowserRouter([
 
 
 
+
+                ]
+            },
+            {
+                path: "stats",
+
+                children: [
+
+                    {
+                        path: "",
+
+                        element: <AllStats />
+
+                    },
+
+
+                    {
+                        path: "create",
+
+                        element: <CreateStat />
+
+                    },
+
+
+                    {
+                        path: ":id/edit",
+
+                        element: <EditStat />
+
+                    },
+
+
+                    {
+                        path: ":id",
+
+                        element: <ViewStat />
+
+                    }
 
                 ]
             },
