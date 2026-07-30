@@ -146,6 +146,30 @@ const SidebarMenu = () => {
 
                 />
 
+                <MenuItem
+
+                    icon="bi bi-bar-chart"
+
+                    title="Stats"
+
+                    hasArrow
+
+                    children={[
+
+                        {
+                            title: "Stats",
+                            link: "/admin/stats"
+                        },
+
+                        {
+                            title: "Add Stat",
+                            link: "/admin/stats/create"
+                        }
+
+                    ]}
+
+                />
+
                 <MenuSection title="Pages" />
 
 
