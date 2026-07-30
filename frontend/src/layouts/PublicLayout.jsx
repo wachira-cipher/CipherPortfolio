@@ -18,7 +18,7 @@ export default function PublicLayout() {
 
         /*
         ============================
-        Load Portfolio CSS
+        LOAD CSS
         ============================
         */
 
@@ -41,25 +41,19 @@ export default function PublicLayout() {
 
 
 
-        cssFiles.forEach((file) => {
+        cssFiles.forEach(src => {
 
 
-            const exists = document.querySelector(
-                `link[href="${file}"]`
-            );
+            if (!document.querySelector(`link[href="${src}"]`)) {
 
 
-            if (!exists) {
-
-
-                const link = document.createElement(
-                    "link"
-                );
+                const link =
+                    document.createElement("link");
 
 
                 link.rel = "stylesheet";
 
-                link.href = file;
+                link.href = src;
 
                 link.dataset.layout = "public";
 
@@ -78,139 +72,146 @@ export default function PublicLayout() {
 
 
 
+
         /*
         ============================
-        Load Portfolio JS
+        LOAD JS
         ============================
         */
 
 
-        const jsFiles = [
+        const scripts = [
+
 
             "/assets/portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js",
-            "/assets/portfolio/vendor/php-email-form/validate.js",
+
+
             "/assets/portfolio/vendor/aos/aos.js",
+
+
             "/assets/portfolio/vendor/typed.js/typed.umd.js",
+
+
             "/assets/portfolio/vendor/waypoints/noframework.waypoints.js",
+
+
             "/assets/portfolio/vendor/purecounter/purecounter_vanilla.js",
+
+
             "/assets/portfolio/vendor/swiper/swiper-bundle.min.js",
+
+
             "/assets/portfolio/vendor/imagesloaded/imagesloaded.pkgd.min.js",
+
+
             "/assets/portfolio/vendor/isotope-layout/isotope.pkgd.min.js",
-            "/assets/portfolio/vendor/glightbox/js/glightbox.min.js",
-            "/assets/portfolio/js/main.js"
+
+
+            "/assets/portfolio/vendor/glightbox/js/glightbox.min.js"
+
 
 
         ];
 
 
 
-        jsFiles.forEach((file) => {
 
 
-            const exists = document.querySelector(
-                `script[src="${file}"]`
-            );
 
 
-            if (!exists) {
+
+        const loadScript = (src) => {
 
 
-                const script = document.createElement(
-                    "script"
-                );
+            return new Promise((resolve) => {
 
 
-                script.src = file;
+                const existing =
+                    document.querySelector(
+                        `script[src="${src}"]`
+                    );
+
+
+
+                if (existing) {
+
+                    resolve();
+
+                    return;
+
+                }
+
+
+
+
+                const script =
+                    document.createElement("script");
+
+
+
+                script.src = src;
+
+
+                script.async = false;
+
 
                 script.dataset.layout = "public";
 
 
-                document.body.appendChild(
-                    script
-                );
+
+                script.onload = resolve;
 
 
-            }
+                document.body.appendChild(script);
 
 
-        });
+            });
 
-
-
-
-
-
-        /*
-        ============================
-        Preloader
-        ============================
-        */
-
-
-        const preloader = document.getElementById(
-            "preloader"
-        );
-
-
-        if (preloader) {
-
-            preloader.remove();
-
-        }
-
-
-
-
-
-
-        /*
-        ============================
-        Scroll Top
-        ============================
-        */
-
-
-        const scrollTop = document.querySelector(
-            ".scroll-top"
-        );
-
-
-
-        const handleScroll = () => {
-
-
-            if (!scrollTop) return;
-
-
-
-            if (window.scrollY > 100) {
-
-
-                scrollTop.classList.add(
-                    "active"
-                );
-
-
-            }
-            else {
-
-
-                scrollTop.classList.remove(
-                    "active"
-                );
-
-
-            }
 
 
         };
 
 
 
-        window.addEventListener(
-            "scroll",
-            handleScroll
-        );
+
+
+
+
+
+        const initScripts = async () => {
+
+
+            for (const script of scripts) {
+
+
+                await loadScript(script);
+
+
+            }
+
+
+
+
+
+
+            /*
+            LOAD MAIN JS LAST
+            */
+
+            await loadScript(
+                "/assets/portfolio/js/main.js"
+            );
+
+
+
+        };
+
+
+
+        initScripts();
+
+
+
 
 
 
@@ -219,7 +220,7 @@ export default function PublicLayout() {
 
         /*
         ============================
-        Cleanup when leaving public
+        CLEANUP
         ============================
         */
 
@@ -231,23 +232,17 @@ export default function PublicLayout() {
                 .querySelectorAll(
                     '[data-layout="public"]'
                 )
-                .forEach((item) => {
+                .forEach(el => {
 
 
-                    item.remove();
+                    el.remove();
 
 
                 });
 
 
-
-            window.removeEventListener(
-                "scroll",
-                handleScroll
-            );
-
-
         };
+
 
 
 
@@ -255,77 +250,6 @@ export default function PublicLayout() {
 
 
 
-
-
-
-    useEffect(() => {
-
-
-        /*
-        BootstrapMade Header Scroll
-        Protection
-        */
-
-
-        const header = document.querySelector(
-            "#header"
-        );
-
-
-
-        if (!header) return;
-
-
-
-
-        const handleScrolled = () => {
-
-
-            if (window.scrollY > 100) {
-
-
-                header.classList.add(
-                    "scrolled"
-                );
-
-
-            }
-            else {
-
-
-                header.classList.remove(
-                    "scrolled"
-                );
-
-
-            }
-
-
-        };
-
-
-
-        window.addEventListener(
-            "scroll",
-            handleScrolled
-        );
-
-
-
-        return () => {
-
-
-            window.removeEventListener(
-                "scroll",
-                handleScrolled
-            );
-
-
-        };
-
-
-
-    }, []);
 
 
 
@@ -340,7 +264,6 @@ export default function PublicLayout() {
             <Header />
 
 
-
             <main>
 
                 <Outlet />
@@ -348,21 +271,13 @@ export default function PublicLayout() {
             </main>
 
 
-
-
             <Footer />
 
 
-
-
-
-            <div id="preloader"></div>
-
-
+            {/* <div id="preloader"></div>*/}
 
 
             <ScrollTop />
-
 
 
         </>

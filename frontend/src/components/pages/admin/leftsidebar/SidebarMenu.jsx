@@ -127,6 +127,25 @@ const SidebarMenu = () => {
                     ]}
                 />
 
+                <MenuItem
+
+                    icon="bi bi-envelope"
+
+                    title="Contacts"
+
+                    hasArrow
+
+                    children={[
+
+                        {
+                            title: "Messages",
+                            link: "/admin/contact"
+                        }
+
+                    ]}
+
+                />
+
                 <MenuSection title="Pages" />
 
 

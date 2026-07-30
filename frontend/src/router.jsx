@@ -48,6 +48,8 @@ import CreateTestimonial from "./components/pages/admin/testimonial/CreateTestim
 import AllTestimonials from "./components/pages/admin/testimonial/AllTestimonials";
 import ViewTestimonial from "./components/pages/admin/testimonial/ViewTestimonial";
 import EditTestimonial from "./components/pages/admin/testimonial/EditTestimonial";
+import AllContacts from "./components/pages/admin/contact/AllContacts";
+import ViewContact from "./components/pages/admin/contact/ViewContact";
 
 const router = createBrowserRouter([
 
@@ -331,6 +333,30 @@ const router = createBrowserRouter([
                         element: <ViewTestimonial />
 
                     }
+
+                ]
+            },
+            {
+                path: "contact",
+
+                children: [
+
+                    {
+                        path: "",
+
+                        element: <AllContacts />
+
+                    },
+
+                    {
+                        path: ":id",
+
+                        element: <ViewContact />
+
+                    },
+
+
+
 
                 ]
             },
