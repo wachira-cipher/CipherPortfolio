@@ -14,6 +14,7 @@ import portfolioRoutes from "./routes/portfolioRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js"
 
 
 
@@ -119,6 +120,14 @@ app.use(
     "/api/testimonial",
 
     testimonialRoutes
+
+);
+
+app.use(
+
+    "/api/contact",
+
+    contactRoutes
 
 );
 
