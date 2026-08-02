@@ -1,35 +1,82 @@
-export default function ServiceHero() {
+export default function ServiceHero({
+    service
+}) {
+
+
+    if (!service) {
+
+
+        return null;
+
+
+    }
+
+
+
     return (
+
         <div
             className="service-hero"
             data-aos="fade-up"
             data-aos-delay="100"
         >
 
+
             <div className="service-meta">
 
+
                 <span className="service-category">
-                    Strategic Consulting
+
+                    {
+                        service.category ||
+                        "Software Development"
+                    }
+
                 </span>
 
+
+
+
                 <span className="reading-time">
+
                     5 min read
+
                 </span>
+
 
             </div>
 
 
+
+
+
             <h1>
-                Business Process Optimization
+
+                {
+                    service.title
+                }
+
             </h1>
 
 
+
+
+
+
             <p className="service-description">
-                Vestibulum ante ipsum primis in faucibus orci luctus et
-                ultrices posuere cubilia curae mauris viverra.
+
+                {
+                    service.shortDescription
+                }
+
             </p>
 
 
+
+
+
         </div>
+
     );
+
 }

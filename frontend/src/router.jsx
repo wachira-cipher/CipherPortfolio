@@ -95,7 +95,7 @@ const router = createBrowserRouter([
                 element: <Services />,
             },
             {
-                path: "service-details",
+                path: "/service-details/:id",
                 element: <ServiceDetails />,
             },
 

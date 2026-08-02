@@ -1,3 +1,25 @@
+import React, {
+    useEffect,
+    useState
+} from "react";
+
+
+import {
+    useParams
+} from "react-router-dom";
+
+
+import {
+    toast
+} from "react-toastify";
+
+
+import {
+    getServiceById
+} from "../../../api/services.api";
+
+
+
 import ServiceHero from "./sections/service-details/ServiceHero";
 import ServiceBenefits from "./sections/service-details/ServiceBenefits";
 import ImplementationTimeline from "./sections/service-details/ImplementationTimeline";
@@ -6,26 +28,183 @@ import SuccessStory from "./sections/service-details/SuccessStory";
 import ConsultationForm from "./sections/service-details/ConsultationForm";
 
 
+
+
+
 export default function ServiceDetails() {
+
+
+    const {
+        id
+    } = useParams();
+
+
+
+    const [
+        service,
+        setService
+    ] = useState(null);
+
+
+
+    const [
+        loading,
+        setLoading
+    ] = useState(true);
+
+
+
+
+
+
+
+
+    useEffect(() => {
+
+
+        const fetchService = async () => {
+
+
+            try {
+
+
+                const response =
+                    await getServiceById(id);
+
+
+
+                setService(
+
+                    response.data.service
+
+                );
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(error);
+
+
+                toast.error(
+                    "Failed loading service details"
+                );
+
+
+            }
+
+
+            finally {
+
+
+                setLoading(false);
+
+
+            }
+
+
+        };
+
+
+
+        fetchService();
+
+
+
+    }, [id]);
+
+
+
+
+
+
+
+
+
+
+    if (loading) {
+
+
+        return (
+
+            <section className="service-details section">
+
+                <div className="container text-center">
+
+                    Loading service...
+
+                </div>
+
+            </section>
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+    if (!service) {
+
+
+        return null;
+
+
+    }
+
+
+
+
+
+
+
+
+
 
     return (
 
-        <section id="service-details" className="service-details section">
+        <section
+            id="service-details"
+            className="service-details section"
+        >
+
+
 
 
             {/* Section Title */}
-            <div className="container section-title" data-aos="fade-up">
 
-                <h2>Service Details</h2>
+            <div
+                className="container section-title"
+                data-aos="fade-up"
+            >
+
+                <h2>
+                    {service.title}
+                </h2>
+
 
                 <p>
-                    Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-                    consectetur velit. Sed ut perspiciatis unde omnis iste natus error
-                    sit voluptatem accusantium doloremque laudantium totam rem aperiam
+
+                    {service.shortDescription}
+
                 </p>
 
+
             </div>
-            {/* End Section Title */}
+
+
+
+
+
+
 
 
 
@@ -36,14 +215,28 @@ export default function ServiceDetails() {
             >
 
 
+
                 <div className="row">
 
 
-                    {/* Main Content Area */}
+
+
+
+
                     <div className="col-lg-7">
 
 
-                        <ServiceHero />
+
+
+
+                        <ServiceHero
+                            service={service}
+                        />
+
+
+
+
+
 
 
                         <div
@@ -53,12 +246,33 @@ export default function ServiceDetails() {
                         >
 
                             <img
-                                src="/assets/img/services/services-7.webp"
-                                alt="Business Process Optimization"
+
+                                src={
+
+                                    service.images?.length
+
+                                        ?
+
+                                        `http://localhost:5000/${service.images[0]}`
+
+                                        :
+
+                                        "/assets/img/services/services-7.webp"
+
+                                }
+
+                                alt={service.title}
+
                                 className="img-fluid"
+
                             />
 
                         </div>
+
+
+
+
+
 
 
 
@@ -68,43 +282,63 @@ export default function ServiceDetails() {
                             data-aos-delay="300"
                         >
 
+
+
                             <h3>
-                                Transform Your Operations
+
+                                {service.title}
+
                             </h3>
 
 
-                            <p>
-                                Donec rutrum congue leo eget malesuada. Vivamus magna justo,
-                                lacinia eget consectetur sed, convallis at tellus.
-                                Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
-                            </p>
 
 
                             <p>
-                                Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam
-                                vehicula elementum sed sit amet dui.
+
+                                {service.description}
+
                             </p>
 
 
-                            <ServiceBenefits />
+
+
+
+
+                            <ServiceBenefits
+                                service={service}
+                            />
+
 
 
                         </div>
 
 
 
-                        <ImplementationTimeline />
+
+
+
+
+
+                        <ImplementationTimeline
+                            service={service}
+                        />
+
+
+
 
 
                     </div>
-                    {/* End Main Content */}
 
 
 
 
-                    {/* Sidebar */}
+
+
+
+
 
                     <div className="col-lg-5">
+
 
 
                         <div
@@ -114,31 +348,50 @@ export default function ServiceDetails() {
                         >
 
 
-                            <ServiceOverview />
+
+                            <ServiceOverview
+                                service={service}
+                            />
 
 
-                            <SuccessStory />
 
 
-                            <ConsultationForm />
+                            <SuccessStory
+                                service={service}
+                            />
+
+
+
+
+
+                            <ConsultationForm
+                                service={service}
+                            />
+
+
 
 
                         </div>
 
 
                     </div>
-                    {/* End Sidebar */}
+
+
 
 
 
                 </div>
 
 
+
             </div>
+
+
 
 
         </section>
 
     );
+
 
 }

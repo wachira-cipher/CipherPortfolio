@@ -1,38 +1,48 @@
-export default function ImplementationTimeline() {
+export default function ImplementationTimeline({
+    service
+}) {
+
 
     const timeline = [
+
         {
             number: "1",
-            title: "Discovery & Assessment",
+            title: "Discovery & Planning",
             description:
-                "Comprehensive analysis of current processes and identification of optimization opportunities.",
+                "Understanding requirements, analyzing goals, and defining the best approach for delivering the solution.",
             duration: "Week 1-2"
         },
 
+
         {
             number: "2",
-            title: "Strategic Planning",
+            title: "Design & Development",
             description:
-                "Development of customized optimization roadmap with clear milestones and success metrics.",
-            duration: "Week 3-4"
+                "Creating, developing, and integrating the required features using modern technologies and best practices.",
+            duration: "Week 3-8"
         },
+
 
         {
             number: "3",
-            title: "Implementation",
+            title: "Testing & Deployment",
             description:
-                "Systematic rollout of process improvements with continuous monitoring and adjustment.",
-            duration: "Week 5-12"
+                "Testing the solution, improving performance, ensuring reliability, and preparing for production release.",
+            duration: "Week 9-12"
         },
+
 
         {
             number: "4",
-            title: "Optimization & Scale",
+            title: "Optimization & Support",
             description:
-                "Fine-tuning of implemented solutions and preparation for organization-wide scaling.",
-            duration: "Week 13-16"
+                "Continuous improvements, maintenance, and scaling to meet future business and user needs.",
+            duration: "Ongoing"
         }
+
     ];
+
+
 
 
     return (
@@ -43,62 +53,113 @@ export default function ImplementationTimeline() {
             data-aos-delay="500"
         >
 
+
             <h3>
+
                 Implementation Journey
+
             </h3>
+
+
+
 
 
             <div className="timeline">
 
 
-                {timeline.map((item, index) => (
 
-                    <div
-                        className="timeline-item"
-                        key={index}
-                    >
+                {
+                    timeline.map(
+
+                        (item, index) => (
 
 
-                        <div className="timeline-marker">
-
-                            <span>
-                                {item.number}
-                            </span>
-
-                        </div>
+                            <div
+                                className="timeline-item"
+                                key={index}
+                            >
 
 
 
-                        <div className="timeline-content">
+                                <div className="timeline-marker">
 
 
-                            <h4>
-                                {item.title}
-                            </h4>
+                                    <span>
+
+                                        {
+                                            item.number
+                                        }
+
+                                    </span>
 
 
-                            <p>
-                                {item.description}
-                            </p>
+                                </div>
 
 
-                            <small>
-                                {item.duration}
-                            </small>
 
 
-                        </div>
 
 
-                    </div>
+                                <div className="timeline-content">
 
-                ))}
+
+                                    <h4>
+
+                                        {
+                                            item.title
+                                        }
+
+                                    </h4>
+
+
+
+
+
+                                    <p>
+
+                                        {
+                                            item.description
+                                        }
+
+                                    </p>
+
+
+
+
+
+                                    <small>
+
+                                        {
+                                            item.duration
+                                        }
+
+                                    </small>
+
+
+
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+                        )
+
+                    )
+                }
+
 
 
             </div>
 
 
+
         </div>
 
     );
+
 }

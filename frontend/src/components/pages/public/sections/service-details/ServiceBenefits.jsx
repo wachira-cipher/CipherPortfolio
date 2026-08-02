@@ -1,34 +1,32 @@
-export default function ServiceBenefits() {
+export default function ServiceBenefits({
+    service
+}) {
 
-    const benefits = [
-        {
-            icon: "bi-lightning-charge",
-            title: "Efficiency Boost",
-            description:
-                "Curabitur arcu erat accumsan id imperdiet et porttitor at sem."
-        },
 
-        {
-            icon: "bi-shield-check",
-            title: "Risk Mitigation",
-            description:
-                "Pellentesque in ipsum id orci porta dapibus vestibulum ante ipsum."
-        },
+    if (!service) {
 
-        {
-            icon: "bi-graph-up",
-            title: "Growth Acceleration",
-            description:
-                "Vivamus suscipit tortor eget felis porttitor volutpat mauris blandit."
-        },
 
-        {
-            icon: "bi-people",
-            title: "Team Alignment",
-            description:
-                "Donec rutrum congue leo eget malesuada vivamus magna justo lacinia."
-        }
+        return null;
+
+
+    }
+
+
+
+    const icons = [
+
+        "bi-lightning-charge",
+
+        "bi-shield-check",
+
+        "bi-graph-up",
+
+        "bi-people"
+
     ];
+
+
+
 
 
     return (
@@ -39,36 +37,76 @@ export default function ServiceBenefits() {
             data-aos-delay="400"
         >
 
-            {benefits.map((benefit, index) => (
 
-                <div
-                    className="benefit-card"
-                    key={index}
-                >
+            {
+                service.features?.map(
 
-                    <div className="benefit-icon">
-
-                        <i className={`bi ${benefit.icon}`}></i>
-
-                    </div>
+                    (feature, index) => (
 
 
-                    <h4>
-                        {benefit.title}
-                    </h4>
+                        <div
+                            className="benefit-card"
+                            key={index}
+                        >
 
 
-                    <p>
-                        {benefit.description}
-                    </p>
+
+                            <div className="benefit-icon">
 
 
-                </div>
+                                <i
 
-            ))}
+                                    className={
+                                        `bi ${icons[index % icons.length]
+                                        }`
+                                    }
+
+                                ></i>
+
+
+                            </div>
+
+
+
+
+
+                            <h4>
+
+                                {
+                                    feature
+                                }
+
+                            </h4>
+
+
+
+
+
+                            <p>
+
+                                {
+
+                                    service.shortDescription
+
+                                }
+
+                            </p>
+
+
+
+
+                        </div>
+
+
+                    )
+
+                )
+            }
+
 
 
         </div>
 
     );
+
 }

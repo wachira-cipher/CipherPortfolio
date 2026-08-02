@@ -1,19 +1,42 @@
-export default function ServiceOverview() {
+export default function ServiceOverview({
+    service
+}) {
+
+
+    if (!service) {
+
+
+        return null;
+
+
+    }
+
+
 
     const stats = [
+
         {
-            number: "16",
-            label: "Weeks Duration"
+            number: service.features?.length || "0",
+            label: "Features Included"
         },
+
+
         {
-            number: "85%",
-            label: "Efficiency Gain"
+            number: service.technologies?.length || "0",
+            label: "Technologies"
         },
+
+
         {
-            number: "24/7",
-            label: "Support Access"
+            number: service.isFeatured ? "Yes" : "No",
+            label: "Featured Service"
         }
+
     ];
+
+
+
+
 
 
     return (
@@ -21,42 +44,75 @@ export default function ServiceOverview() {
         <div className="overview-card">
 
 
+
             <div className="overview-header">
+
 
                 <h4>
                     Service Overview
                 </h4>
 
+
             </div>
+
+
+
+
+
 
 
 
             <div className="overview-stats">
 
 
-                {stats.map((stat, index) => (
 
-                    <div
-                        className="stat-item"
-                        key={index}
-                    >
+                {
+                    stats.map(
 
-                        <div className="stat-number">
-                            {stat.number}
-                        </div>
+                        (stat, index) => (
 
 
-                        <div className="stat-label">
-                            {stat.label}
-                        </div>
+                            <div
+                                className="stat-item"
+                                key={index}
+                            >
 
 
-                    </div>
+                                <div className="stat-number">
 
-                ))}
+                                    {
+                                        stat.number
+                                    }
+
+                                </div>
+
+
+
+                                <div className="stat-label">
+
+                                    {
+                                        stat.label
+                                    }
+
+                                </div>
+
+
+                            </div>
+
+
+                        )
+
+                    )
+                }
+
 
 
             </div>
+
+
+
+
+
 
 
 
@@ -64,53 +120,132 @@ export default function ServiceOverview() {
             <div className="overview-details">
 
 
-                <div className="detail-row">
-
-                    <span className="detail-label">
-                        Investment Range
-                    </span>
-
-                    <span className="detail-value">
-                        $15K - $45K
-                    </span>
-
-                </div>
 
 
 
 
                 <div className="detail-row">
 
+
                     <span className="detail-label">
-                        Team Composition
+
+                        Category
+
                     </span>
+
+
+
 
                     <span className="detail-value">
-                        3-5 Specialists
+
+                        {
+                            service.category
+                        }
+
                     </span>
 
+
+
                 </div>
+
+
+
+
 
 
 
 
                 <div className="detail-row">
 
+
                     <span className="detail-label">
-                        Industries Served
+
+                        Starting Price
+
                     </span>
+
+
+
 
                     <span className="detail-value">
-                        Manufacturing, Tech, Finance
+
+
+                        {
+                            service.startingPrice > 0
+
+                                ?
+
+                                `$${service.startingPrice}`
+
+                                :
+
+                                "Custom Quote"
+
+                        }
+
+
                     </span>
 
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+                <div className="detail-row">
+
+
+                    <span className="detail-label">
+
+                        Status
+
+                    </span>
+
+
+
+
+                    <span className="detail-value">
+
+
+                        {
+                            service.status
+
+                                ?
+
+                                "Available"
+
+                                :
+
+                                "Currently Unavailable"
+
+                        }
+
+
+                    </span>
+
+
+
+                </div>
+
+
+
+
 
 
             </div>
 
 
+
+
+
         </div>
 
     );
+
 }
