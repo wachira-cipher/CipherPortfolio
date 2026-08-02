@@ -274,7 +274,7 @@ export default function Contact() {
 
 
                                     <p>
-                                        Nairobi, Kenya
+                                        Kirinyaga County,kenya
                                     </p>
 
 

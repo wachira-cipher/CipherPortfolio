@@ -16,3 +16,8 @@ export const updateProfile = (formData) => {
     );
 
 };
+
+
+export const getProfile = () => {
+    return http.get("/profile");
+};
