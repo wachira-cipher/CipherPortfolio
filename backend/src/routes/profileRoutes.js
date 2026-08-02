@@ -2,7 +2,7 @@ import express from "express";
 import upload from "../middleware/upload.js";
 
 import {
-    getProfile,
+    getPublicProfile,
     createProfile,
     updateProfile,
     deleteProfile
@@ -18,8 +18,7 @@ const router = express.Router();
 
 router.get(
     "/",
-    protect,
-    getProfile
+    getPublicProfile
 );
 
 

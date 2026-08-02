@@ -1,41 +1,33 @@
 import Profile from "../models/Profile.js";
 
 
-// GET PROFILE
-export const getProfile = async (req, res) => {
+// profile
 
+export const getPublicProfile = async (req, res) => {
     try {
 
+        const profile = await Profile.findOne();
 
-        const profile =
-            await Profile.findOne();
+        if (!profile) {
+            return res.status(404).json({
+                success: false,
+                message: "Profile not found"
+            });
+        }
 
-
-
-        res.status(200).json({
-
+        res.json({
             success: true,
-
-            user: req.user,
-
             profile
-
         });
 
-
-    }
-    catch (error) {
+    } catch (error) {
 
         res.status(500).json({
-
             success: false,
-
             message: error.message
-
         });
 
     }
-
 };
 
 
