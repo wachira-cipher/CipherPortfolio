@@ -16,6 +16,10 @@ import resumeRoutes from "./routes/resumeRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js"
 import statRoutes from "./routes/statRoutes.js";
+import consultationRoutes from "./routes/consultationRoutes.js";
+
+
+
 
 
 
@@ -135,6 +139,14 @@ app.use(
 app.use(
     "/api/stats",
     statRoutes
+);
+
+app.use(
+
+    "/api/consultations",
+
+    consultationRoutes
+
 );
 
 

@@ -1,19 +1,41 @@
-export default function SuccessStory() {
+export default function SuccessStory({
+    service
+}) {
+
+
+    if (!service) {
+
+
+        return null;
+
+
+    }
+
+
+
 
     return (
 
         <div className="success-story">
 
 
+
+
+
             <div className="story-quote">
 
+
                 <p>
-                    "Curabitur non nulla sit amet nisl tempus convallis quis
-                    ac lectus. Pellentesque habitant morbi tristique senectus
-                    et netus et malesuada fames ac turpis egestas."
+
+                    "{service.shortDescription}"
+
                 </p>
 
+
             </div>
+
+
+
 
 
 
@@ -21,36 +43,62 @@ export default function SuccessStory() {
             <div className="story-author">
 
 
+
                 <img
+
                     src="/assets/img/person/person-m-8.webp"
-                    alt="Michael Chen"
+
+                    alt="Client Success"
+
                     className="author-avatar"
+
                 />
+
+
+
 
 
 
                 <div className="author-details">
 
 
+
                     <h5>
-                        Michael Chen
+
+                        Client Success Story
+
                     </h5>
 
 
+
+
                     <span>
-                        Operations Director
+
+                        {service.category}
+
                     </span>
 
 
+
+
                     <small>
-                        TechCorp Industries
+
+                        Digital Solutions Partner
+
                     </small>
+
 
 
                 </div>
 
 
+
+
             </div>
+
+
+
+
 
 
 
@@ -59,15 +107,26 @@ export default function SuccessStory() {
             <div className="story-metrics">
 
 
+
                 <div className="metric">
 
+
                     <span className="metric-value">
-                        45%
+
+                        {
+                            service.features?.length || 0
+                        }
+
                     </span>
 
+
+
                     <span className="metric-label">
-                        Cost Reduction
+
+                        Features Delivered
+
                     </span>
+
 
                 </div>
 
@@ -75,17 +134,33 @@ export default function SuccessStory() {
 
 
 
+
+
+
+
                 <div className="metric">
 
+
                     <span className="metric-value">
-                        3x
+
+                        {
+                            service.technologies?.length || 0
+                        }
+
                     </span>
+
+
 
                     <span className="metric-label">
-                        Speed Increase
+
+                        Technologies Used
+
                     </span>
 
+
                 </div>
+
+
 
 
 
@@ -93,7 +168,10 @@ export default function SuccessStory() {
 
 
 
+
+
         </div>
 
     );
+
 }
