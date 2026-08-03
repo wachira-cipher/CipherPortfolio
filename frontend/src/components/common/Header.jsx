@@ -52,7 +52,7 @@ export default function Header() {
                             </Link>
                         </li>
 
-
+                        {/*
                         <li className="dropdown">
 
                             <a href="#">
@@ -135,7 +135,7 @@ export default function Header() {
 
                         </li>
 
-
+*/}
                         <li>
                             <Link to="/contact">
                                 Contact
