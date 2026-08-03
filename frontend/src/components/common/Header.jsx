@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "../../assets/styles/header.css";
+import siteConfig from "../../config/site.config";
 
 
 export default function Header() {
+    const [open, setOpen] = useState(false);
 
     return (
 
@@ -151,43 +154,34 @@ export default function Header() {
 
                 </nav>
 
-                <div className="header-account">
+                <div className="account-dropdown">
 
-                    <div className="account-dropdown">
+                    <button
+                        className="account-icon"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <i className="bi bi-person-circle"></i>
+                    </button>
 
-                        <a
-                            href="#"
-                            className="account-icon"
-                            onClick={(e) => e.preventDefault()}
-                        >
-                            <i className="bi bi-person-circle"></i>
-                        </a>
 
-                        <ul className="dropdown-menu">
+                    <ul className={`dropdown-menu ${open ? "show" : ""}`}>
 
-                            <li>
-                                <a
-                                    className="dropdown-item"
-                                    href="/auth/login"
-                                >
-                                    <i className="bi bi-box-arrow-in-right"></i>
-                                    Login
-                                </a>
-                            </li>
+                        <li>
+                            <a className="dropdown-item" href="/auth/login">
+                                <i className="bi bi-box-arrow-in-right"></i>
+                                Login
+                            </a>
+                        </li>
 
-                            <li>
-                                <a
-                                    className="dropdown-item"
-                                    href="/auth/register"
-                                >
-                                    <i className="bi bi-person-plus"></i>
-                                    Sign Up
-                                </a>
-                            </li>
 
-                        </ul>
+                        <li>
+                            <a className="dropdown-item" href="/auth/register">
+                                <i className="bi bi-person-plus"></i>
+                                Sign Up
+                            </a>
+                        </li>
 
-                    </div>
+                    </ul>
 
                 </div>
 
@@ -199,26 +193,44 @@ export default function Header() {
 
                 <div className="header-social-links">
 
-
-                    <a href="#" className="twitter">
+                    <a
+                        href={siteConfig.socialLinks.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="twitter"
+                    >
                         <i className="bi bi-twitter-x"></i>
                     </a>
 
 
-                    <a href="#" className="facebook">
+                    <a
+                        href={siteConfig.socialLinks.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="facebook"
+                    >
                         <i className="bi bi-facebook"></i>
                     </a>
 
 
-                    <a href="#" className="instagram">
+                    <a
+                        href={siteConfig.socialLinks.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="instagram"
+                    >
                         <i className="bi bi-instagram"></i>
                     </a>
 
 
-                    <a href="#" className="linkedin">
+                    <a
+                        href={siteConfig.socialLinks.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="linkedin"
+                    >
                         <i className="bi bi-linkedin"></i>
                     </a>
-
 
                 </div>
 

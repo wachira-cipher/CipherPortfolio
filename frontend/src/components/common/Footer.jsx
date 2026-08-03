@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import siteConfig from "../../config/site.config";
+
 
 export default function Footer() {
+
 
     return (
 
@@ -15,19 +18,32 @@ export default function Footer() {
                 <div className="copyright text-center">
 
                     <p>
-                        Copyright
-                        © <span>{new Date().getFullYear()}</span>
 
-                        <strong className="px-1 sitename">
-                            <Link to="/">
-                                CipherPortfolio
-                            </Link>
-                        </strong>
+                        Copyright ©
 
                         <span>
+                            {new Date().getFullYear()}
+                        </span>
+
+
+                        <strong className="px-1 sitename">
+
+                            <Link to="/">
+
+                                {siteConfig.name}
+
+                            </Link>
+
+                        </strong>
+
+
+                        <span>
+
                             All Rights Reserved
                             <br />
+
                         </span>
+
 
                     </p>
 
@@ -35,46 +51,63 @@ export default function Footer() {
 
 
 
+
+
                 <div className="social-links d-flex justify-content-center">
 
 
                     <a
-                        href="https://x.com/"
+                        href={siteConfig.socialLinks.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
+
                         <i className="bi bi-twitter-x"></i>
+
                     </a>
 
 
+
                     <a
-                        href="https://facebook.com/"
+                        href={siteConfig.socialLinks.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
+
                         <i className="bi bi-facebook"></i>
+
                     </a>
 
 
+
+
                     <a
-                        href="https://instagram.com/"
+                        href={siteConfig.socialLinks.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
+
                         <i className="bi bi-instagram"></i>
+
                     </a>
+
+
 
 
                     <a
-                        href="https://linkedin.com/"
+                        href={siteConfig.socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
+
                         <i className="bi bi-linkedin"></i>
+
                     </a>
+
 
 
                 </div>
+
 
 
 
@@ -82,18 +115,24 @@ export default function Footer() {
 
                 <div className="credits">
 
+
                     Designed by{" "}
 
+
                     <a
-                        href="https://www.cyberspheresystems.com"
+                        href={siteConfig.designerUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        CybersphereSystems.com
+
+                        {siteConfig.designer}
+
                     </a>
 
 
+
                 </div>
+
 
 
 

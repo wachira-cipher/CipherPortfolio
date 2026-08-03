@@ -2,83 +2,391 @@
    Header Account Dropdown
 ========================================== */
 
+.header-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .account-dropdown {
     position: relative;
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     color: #051117;
 }
 
+
+/* ==========================
+   Account Icon
+========================== */
+
 .account-dropdown .account-icon {
-    color: inherit;
+
+    color: var(--default-color);
+
+    background-color: var(--background-color);
+
     font-size: 1.45rem;
-    text-decoration: none;
+
+    width: 42px;
+    height: 42px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color .3s ease;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        color .3s ease,
+        background-color .3s ease,
+        box-shadow .3s ease;
+
 }
 
-.account-dropdown .account-icon:hover {
+
+.account-dropdown .account-icon:hover,
+.account-dropdown .account-icon:focus {
+
     color: var(--accent-color, #0d6efd);
+
+    background-color: var(--surface-color, #ffffff);
+
+    outline: none;
+
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, .15);
+
 }
 
-/* Center the dropdown below the icon */
+
+
+
+
+/* ==========================
+   Dropdown Menu
+========================== */
+
+
 .account-dropdown .dropdown-menu {
+
     position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
-    display: none;
+
+    top: calc(100% + 12px);
+
+    right: 0;
 
     min-width: 180px;
+
     padding: .5rem 0;
 
-    border: none;
-    border-radius: 10px;
+    margin: 0;
+
+
+    display: none;
+
 
     background: #051117;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
 
-    animation: fadeInDown .2s ease;
+    border: none;
 
-    z-index: 1050;
+    border-radius: 10px;
+
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .18);
+
+
+    z-index: 9999;
+
+
+    opacity: 0;
+
+    transform: translateY(-10px);
+
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
+
+
 }
 
-.account-dropdown:hover .dropdown-menu {
+
+
+
+
+/*
+================================
+React controlled state
+Add class "show" when opened
+================================
+*/
+
+
+.account-dropdown .dropdown-menu.show {
+
+
     display: block;
+
+
+    opacity: 1;
+
+
+    transform: translateY(0);
+
+
 }
+
+
+
+
+
+
+
+/* ==========================
+   Dropdown Items
+========================== */
+
 
 .account-dropdown .dropdown-item {
+
+
     display: flex;
+
     align-items: center;
+
+
     gap: .65rem;
 
+
+    width: 100%;
+
+
+    padding: .75rem 1rem;
+
+
     color: #fff;
-    padding: .7rem 1rem;
-    transition: all .25s ease;
+
+
+    text-decoration: none;
+
+
+    font-size: .95rem;
+
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+
+
 }
 
-.account-dropdown .dropdown-item:hover {
+
+
+.account-dropdown .dropdown-item:hover,
+.account-dropdown .dropdown-item:focus {
+
+
     background: #0b1b24;
+
+
     color: var(--accent-color, #0d6efd);
+
+
+    outline: none;
+
+
 }
+
+
+
+
 
 .account-dropdown .dropdown-item i {
+
+
     width: 18px;
+
     text-align: center;
+
+
 }
 
+
+
+
+
+
+
+/* ==========================
+   Animation
+========================== */
+
+
 @keyframes fadeInDown {
+
+
     from {
+
+
         opacity: 0;
-        transform: translate(-50%, -8px);
+
+        transform: translateY(-10px);
+
+
     }
 
+
     to {
+
+
         opacity: 1;
-        transform: translate(-50%, 0);
+
+        transform: translateY(0);
+
+
     }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   Tablet Screens
+========================================== */
+
+
+@media (max-width: 991px) {
+
+
+    .account-dropdown .dropdown-menu {
+
+
+        right: -20px;
+
+
+        min-width: 170px;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   Mobile Screens
+========================================== */
+
+
+@media (max-width: 576px) {
+
+
+    .header-account {
+
+
+        margin-left: auto;
+
+
+    }
+
+
+
+    .account-dropdown .account-icon {
+
+
+        font-size: 1.35rem;
+
+
+    }
+
+
+
+
+    .account-dropdown .dropdown-menu {
+
+
+        position: fixed;
+
+
+        top: 70px;
+
+
+        right: 15px;
+
+
+        left: auto;
+
+
+        width: calc(100vw - 30px);
+
+
+        max-width: 280px;
+
+
+    }
+
+
+
+    .account-dropdown .dropdown-item {
+
+
+        padding: .85rem 1rem;
+
+
+        font-size: 1rem;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   Very Small Screens
+========================================== */
+
+
+@media (max-width: 360px) {
+
+
+    .account-dropdown .dropdown-menu {
+
+
+        width: calc(100vw - 20px);
+
+
+        right: 10px;
+
+
+    }
+
+
 }
