@@ -101,7 +101,7 @@ const router = createBrowserRouter([
 
 
             {
-                path: "portfolio-details",
+                path: "/portfolio/:id",
                 element: <PortfolioDetails />,
             },
 

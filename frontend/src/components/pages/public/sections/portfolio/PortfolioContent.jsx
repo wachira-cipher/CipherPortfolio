@@ -1,63 +1,207 @@
 import React from "react";
+
 import ProjectAccordion from "./ProjectAccordion";
 import ProjectFeatures from "./ProjectFeatures";
 
-export default function PortfolioContent() {
+
+
+export default function PortfolioContent({
+
+    portfolio
+
+}) {
+
+
+    if (!portfolio) {
+
+        return null;
+
+    }
+
+
     return (
+
         <div className="portfolio-details-content">
+
+
             {/* Project Meta */}
+
             <div className="project-meta">
+
+
                 <div className="badge-wrapper">
-                    <span className="project-badge">UX/UI Design</span>
+
+                    <span className="project-badge">
+
+                        {portfolio.category}
+
+                    </span>
+
                 </div>
+
+
 
                 <div className="date-client">
-                    <div className="meta-item">
-                        <i className="bi bi-calendar-check"></i>
-                        <span>September 2024</span>
-                    </div>
 
-                    <div className="meta-item">
-                        <i className="bi bi-buildings"></i>
-                        <span>DigitalCraft Solutions</span>
-                    </div>
+
+                    {
+
+                        portfolio.projectDate && (
+
+                            <div className="meta-item">
+
+                                <i className="bi bi-calendar-check"></i>
+
+                                <span>
+
+                                    {portfolio.projectDate}
+
+                                </span>
+
+                            </div>
+
+                        )
+
+                    }
+
+
+
+                    {
+
+                        portfolio.client && (
+
+                            <div className="meta-item">
+
+                                <i className="bi bi-buildings"></i>
+
+                                <span>
+
+                                    {portfolio.client}
+
+                                </span>
+
+                            </div>
+
+                        )
+
+                    }
+
+
                 </div>
+
+
             </div>
+
+
 
             {/* Project Title */}
+
             <h2 className="project-title">
-                Innovative Financial Dashboard App
+
+                {portfolio.title}
+
             </h2>
 
-            {/* Website */}
-            <div className="project-website">
-                <i className="bi bi-link-45deg"></i>
 
-                <a
-                    href="https://projectwebsite.example.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    projectwebsite.example.com
-                </a>
-            </div>
+
+            {/* Website */}
+
+            {
+
+                portfolio.website && (
+
+                    <div className="project-website">
+
+                        <i className="bi bi-link-45deg"></i>
+
+                        <a
+
+                            href={portfolio.website}
+
+                            target="_blank"
+
+                            rel="noopener noreferrer"
+
+                        >
+
+                            {portfolio.website}
+
+                        </a>
+
+                    </div>
+
+                )
+
+            }
+
+
+
+            {/* GitHub */}
+
+            {
+
+                portfolio.github && (
+
+                    <div className="project-website mt-2">
+
+                        <i className="bi bi-github"></i>
+
+                        <a
+
+                            href={portfolio.github}
+
+                            target="_blank"
+
+                            rel="noopener noreferrer"
+
+                        >
+
+                            View Source Code
+
+                        </a>
+
+                    </div>
+
+                )
+
+            }
+
+
 
             {/* Overview */}
+
             <div className="project-overview">
+
+
                 <p className="lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Maecenas varius tortor nibh, sit amet tempor nibh finibus
-                    et. Aenean eu enim justo. Vestibulum aliquam hendrerit
-                    molestie.
+
+                    {portfolio.description}
+
                 </p>
 
-                <ProjectAccordion />
+
+                <ProjectAccordion
+
+                    portfolio={portfolio}
+
+                />
+
+
             </div>
 
+
+
             {/* Features */}
-            <ProjectFeatures />
+
+            <ProjectFeatures
+
+                features={portfolio.features}
+
+            />
 
 
         </div>
+
     );
+
 }
