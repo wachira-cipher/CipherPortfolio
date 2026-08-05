@@ -5,31 +5,43 @@ import {
   useState
 } from "react";
 
+
 import {
   loginUser,
   registerUser,
-  getProfile
+  getProfile,
+  unlockUser
 } from "../api/auth.api";
+
 
 import {
   updateProfile
 } from "../api/profile.api";
+
 
 import {
   toast
 } from "react-toastify";
 
 
+import lockTimer from "../utils/IdleTimer";
+
+
+
 const AuthContext = createContext();
+
+
 
 
 
 export function AuthProvider({ children }) {
 
 
+
   const [user, setUserState] = useState(null);
 
   const [profile, setProfile] = useState(null);
+
 
 
   const [token, setToken] = useState(
@@ -41,6 +53,146 @@ export function AuthProvider({ children }) {
 
 
 
+  /*
+  ===============================
+  SCREEN LOCK
+  ===============================
+  */
+
+
+  const [locked, setLocked] = useState(
+    localStorage.getItem("locked") === "true"
+  );
+
+
+
+
+
+  const lockScreen = () => {
+
+
+    setLocked(true);
+
+
+    localStorage.setItem(
+      "locked",
+      "true"
+    );
+
+
+  };
+
+
+
+
+
+
+
+  const unlockScreen = async (password) => {
+
+
+    const response =
+      await unlockUser(password);
+
+
+
+
+    if (response.success) {
+
+
+      setLocked(false);
+
+
+
+      localStorage.removeItem(
+        "locked"
+      );
+
+
+
+      /*
+      restart idle timer
+      */
+
+      lockTimer.reset();
+
+
+    }
+
+
+
+    return response;
+
+
+  };
+
+
+
+
+
+
+
+
+
+  /*
+  ===============================
+  AUTO IDLE LOCK TIMER
+  ===============================
+  */
+
+
+  useEffect(() => {
+
+
+    if (!token) {
+
+
+      lockTimer.stop();
+
+
+      return;
+
+
+    }
+
+
+
+    lockTimer.start(
+
+      5 * 60 * 1000,
+
+
+      () => {
+
+
+        lockScreen();
+
+
+      }
+
+    );
+
+
+
+
+    return () => {
+
+
+      lockTimer.stop();
+
+
+    };
+
+
+
+  }, [token]);
+
+
+
+
+
+
+
 
 
   /*
@@ -49,29 +201,41 @@ export function AuthProvider({ children }) {
   ===============================
   */
 
+
   const setUser = (newUser) => {
 
 
     setUserState(newUser);
 
 
+
     if (newUser) {
 
+
       localStorage.setItem(
+
         "user",
+
         JSON.stringify(newUser)
+
       );
+
 
     }
     else {
+
 
       localStorage.removeItem(
         "user"
       );
 
+
     }
 
+
   };
+
+
 
 
 
@@ -85,6 +249,7 @@ export function AuthProvider({ children }) {
   ===============================
   */
 
+
   useEffect(() => {
 
 
@@ -96,40 +261,28 @@ export function AuthProvider({ children }) {
 
 
 
+
       if (!savedToken) {
+
 
         setLoading(false);
 
         return;
 
+
       }
+
+
 
 
 
       try {
 
 
-        const response = await getProfile();
+        const response =
+          await getProfile();
 
 
-
-        console.log(
-          "HYDRATE PROFILE:",
-          response
-        );
-
-
-
-        /*
-        backend returns:
-
-        {
-          success:true,
-          user:{},
-          profile:{}
-        }
-
-        */
 
 
         setUser(
@@ -148,6 +301,7 @@ export function AuthProvider({ children }) {
       catch (error) {
 
 
+
         console.error(
           "Hydration failed:",
           error
@@ -160,8 +314,15 @@ export function AuthProvider({ children }) {
         );
 
 
+
         localStorage.removeItem(
           "user"
+        );
+
+
+
+        localStorage.removeItem(
+          "locked"
         );
 
 
@@ -173,11 +334,15 @@ export function AuthProvider({ children }) {
         setProfile(null);
 
 
+
       }
 
 
 
+
+
       setLoading(false);
+
 
 
     };
@@ -185,6 +350,7 @@ export function AuthProvider({ children }) {
 
 
     hydrate();
+
 
 
   }, []);
@@ -220,6 +386,7 @@ export function AuthProvider({ children }) {
 
 
 
+
     localStorage.setItem(
       "token",
       token
@@ -235,10 +402,17 @@ export function AuthProvider({ children }) {
 
 
 
+    localStorage.removeItem(
+      "locked"
+    );
 
-    /*
-    Immediately load profile
-    */
+
+
+    setLocked(false);
+
+
+
+
 
     try {
 
@@ -258,12 +432,13 @@ export function AuthProvider({ children }) {
 
 
       console.error(
-        "Profile loading after login failed",
+        "Profile loading failed",
         error
       );
 
 
     }
+
 
 
 
@@ -294,12 +469,7 @@ export function AuthProvider({ children }) {
   const register = async (formData) => {
 
 
-    const response =
-      await registerUser(formData);
-
-
-
-    return response;
+    return await registerUser(formData);
 
 
   };
@@ -317,42 +487,54 @@ export function AuthProvider({ children }) {
   UPDATE PROFILE
   ===============================
   */
+
+
   const updateProfileState = async (updatedProfile) => {
+
 
     try {
 
-      const response = await updateProfile(updatedProfile);
+
+      const response =
+        await updateProfile(updatedProfile);
 
 
-      console.log(
-        "UPDATE RESPONSE:",
-        response.data
-      );
 
-
-      const newProfile = response.data.profile;
+      const newProfile =
+        response.data.profile;
 
 
 
       if (!newProfile) {
 
+
         throw new Error(
           "Profile update returned empty profile"
         );
+
 
       }
 
 
 
-      setProfile(newProfile);
+
+      setProfile(
+        newProfile
+      );
 
 
 
       setUserState(prev => ({
+
         ...prev,
+
         name: newProfile.name,
+
         email: newProfile.email
+
       }));
+
+
 
 
 
@@ -365,7 +547,9 @@ export function AuthProvider({ children }) {
       return newProfile;
 
 
-    } catch (error) {
+
+    }
+    catch (error) {
 
 
       toast.error(
@@ -373,18 +557,13 @@ export function AuthProvider({ children }) {
       );
 
 
-      console.error(
-        "Update profile error:",
-        error
-      );
-
-
       throw error;
+
 
     }
 
-  };
 
+  };
 
 
 
@@ -438,13 +617,24 @@ export function AuthProvider({ children }) {
   const logout = () => {
 
 
+    lockTimer.stop();
+
+
+
     localStorage.removeItem(
       "token"
     );
 
 
+
     localStorage.removeItem(
       "user"
+    );
+
+
+
+    localStorage.removeItem(
+      "locked"
     );
 
 
@@ -455,6 +645,9 @@ export function AuthProvider({ children }) {
 
     setProfile(null);
 
+    setLocked(false);
+
+
 
 
     window.location.replace(
@@ -462,7 +655,10 @@ export function AuthProvider({ children }) {
     );
 
 
+
   };
+
+
 
 
 
@@ -474,35 +670,58 @@ export function AuthProvider({ children }) {
 
     <AuthContext.Provider
 
+
       value={{
 
         user,
 
         setUser,
 
+
         profile,
 
         setProfile,
 
+
         token,
+
 
         loading,
 
+
         login,
+
 
         register,
 
+
         logout,
+
+
+
+        lockScreen,
+
+
+        unlockScreen,
+
+
+        locked,
+
+
 
         updateProfileState,
 
+
         refreshProfile,
+
 
 
         isAuthenticated:
           !!token
 
+
       }}
+
 
     >
 
@@ -510,7 +729,9 @@ export function AuthProvider({ children }) {
       {children}
 
 
+
     </AuthContext.Provider>
+
 
   );
 

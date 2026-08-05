@@ -45,3 +45,16 @@ export const logoutUser = async () => {
     return response.data;
 
 };
+
+export const unlockUser = async (password) => {
+
+    const response = await http.post(
+        "/auth/unlock",
+        {
+            password
+        }
+    );
+
+    return response.data;
+
+};

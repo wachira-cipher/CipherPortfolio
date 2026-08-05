@@ -15,7 +15,11 @@ import { useAuth } from "../context/AuthContext";
 
 const AdminLayout = () => {
 
-    const { loading, token } = useAuth();
+    const {
+        loading,
+        token,
+        locked
+    } = useAuth();
 
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -124,6 +128,15 @@ const AdminLayout = () => {
 
     if (!token) {
         return <Navigate to="/auth/login" replace />;
+    }
+
+    if (locked) {
+        return (
+            <Navigate
+                to="/auth/lock-screen"
+                replace
+            />
+        );
     }
 
 

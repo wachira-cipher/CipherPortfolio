@@ -1,11 +1,55 @@
+import {
+    useAuth
+} from "../../../../context/AuthContext";
+
+
 import MenuSection from "./sidebarmenu/MenuSection";
 import MenuItem from "./sidebarmenu/ MenuItem";
 
 
+
 const SidebarMenu = () => {
 
+
+    const {
+        user,
+        token
+    } = useAuth();
+
+
+
+
+    const isAuthenticated =
+        !!token;
+
+
+
+    const isAdmin =
+        user?.role === "admin";
+
+    const authChildren = isAuthenticated
+        ? [
+            {
+                title: "Lock Screen",
+                link: "/auth/lock-screen"
+            }
+        ]
+        : [
+            {
+                title: "Login",
+                link: "/auth/login"
+            },
+            {
+                title: "Register",
+                link: "/auth/register"
+            }
+        ];
+
+
     return (
+
         <div id="sidebar-menu">
+
 
             <ul
                 className="metismenu list-unstyled"
@@ -13,16 +57,27 @@ const SidebarMenu = () => {
             >
 
 
+
                 <MenuSection title="Menu" />
 
 
-                <MenuItem
-                    icon="uil-home-alt"
-                    title="Dashboard"
-                    badge="01"
-                    badgeClass="bg-primary"
-                    link="/admin/dashboard"
-                />
+
+                {
+                    isAuthenticated && (
+
+                        <MenuItem
+                            icon="uil-home-alt"
+                            title="Dashboard"
+                            badge="01"
+                            badgeClass="bg-primary"
+                            link="/admin/dashboard"
+                        />
+
+                    )
+                }
+
+
+
 
 
 
@@ -35,13 +90,20 @@ const SidebarMenu = () => {
 
 
 
+
+
                 <MenuItem
+
                     icon="bi-briefcase"
+
                     title="Portfolio"
+
                     hasArrow
+
                     children={[
+
                         {
-                            title: "Portfolios",
+                            title: "All Portfolios",
                             link: "/admin/portfolio"
                         },
 
@@ -49,7 +111,9 @@ const SidebarMenu = () => {
                             title: "Add Portfolio",
                             link: "/admin/portfolio/create"
                         }
+
                     ]}
+
                 />
 
 
@@ -58,78 +122,145 @@ const SidebarMenu = () => {
 
 
 
+
+
+
                 <MenuItem
-                    icon="bi bi-code-slash"
+
+                    icon="bi-code-slash"
+
                     title="Skills"
+
                     hasArrow
+
                     children={[
+
                         {
                             title: "All Skills",
                             link: "/admin/skill"
                         },
+
                         {
                             title: "Add Skill",
                             link: "/admin/skill/create"
                         }
+
                     ]}
+
                 />
 
 
 
+
+
+
+
+
+
                 <MenuItem
-                    icon="bi bi-layers"
+
+                    icon="bi-layers"
+
                     title="Services"
+
                     hasArrow
+
                     children={[
+
                         {
                             title: "All Services",
                             link: "/admin/service"
                         },
+
+
                         {
                             title: "Add Service",
                             link: "/admin/service/create"
-                        },
+                        }
+
 
                     ]}
+
                 />
 
+
+
+
+
+
+
+
+
                 <MenuItem
-                    icon="bi bi-file-earmark-text"
+
+                    icon="bi-file-earmark-text"
+
                     title="Resume"
+
                     hasArrow
+
                     children={[
+
                         {
                             title: "View Resume",
                             link: "/admin/resume"
                         },
+
+
                         {
                             title: "Add Resume",
                             link: "/admin/resume/create"
-                        },
+                        }
 
                     ]}
+
                 />
 
+
+
+
+
+
+
+
+
                 <MenuItem
-                    icon="bi bi-chat-quote"
+
+                    icon="bi-chat-quote"
+
                     title="Testimonials"
+
                     hasArrow
+
                     children={[
+
                         {
                             title: "Testimonials",
                             link: "/admin/testimonial"
                         },
+
+
                         {
                             title: "Add Testimonial",
                             link: "/admin/testimonial/create"
-                        },
+                        }
+
 
                     ]}
+
                 />
+
+
+
+
+
+
+
+
 
                 <MenuItem
 
-                    icon="bi bi-envelope"
+                    icon="bi-envelope"
 
                     title="Contacts"
 
@@ -146,9 +277,18 @@ const SidebarMenu = () => {
 
                 />
 
+
+
+
+
+
+
+
+
+
                 <MenuItem
 
-                    icon="bi bi-bar-chart"
+                    icon="bi-bar-chart"
 
                     title="Stats"
 
@@ -156,46 +296,49 @@ const SidebarMenu = () => {
 
                     children={[
 
+
                         {
                             title: "Stats",
                             link: "/admin/stats"
                         },
+
 
                         {
                             title: "Add Stat",
                             link: "/admin/stats/create"
                         }
 
+
                     ]}
 
                 />
 
+
+
+
+
+
+
+
+
+
                 <MenuSection title="Pages" />
+
+
+
+
+
+
+
 
 
                 <MenuItem
                     icon="uil-user-circle"
                     title="Authentication"
                     hasArrow
-                    children={[
-                        {
-                            title: "Login",
-                            link: "auth-login.html"
-                        },
-                        {
-                            title: "Register",
-                            link: "auth-register.html"
-                        },
-                        {
-                            title: "Recover Password",
-                            link: "auth-recoverpw.html"
-                        },
-                        {
-                            title: "Lock Screen",
-                            link: "auth-lock-screen.html"
-                        }
-                    ]}
+                    children={authChildren}
                 />
+
 
 
 
@@ -203,9 +346,14 @@ const SidebarMenu = () => {
 
             </ul>
 
+
+
         </div>
+
     );
+
 };
+
 
 
 export default SidebarMenu;
