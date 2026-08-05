@@ -55,6 +55,7 @@ import CreateStat from "./components/pages/admin/stat/Createstat";
 import AllStats from "./components/pages/admin/stat/AllStats";
 import EditStat from "./components/pages/admin/stat/EditStat";
 import ViewStat from "./components/pages/admin/stat/ViewStat";
+import LockScreen from "./components/auth/LockScreen";
 
 
 const router = createBrowserRouter([
@@ -146,6 +147,10 @@ const router = createBrowserRouter([
                 path: "register",
                 element: <Register />,
             },
+            {
+                path: "/auth/lock-screen",
+                element: <LockScreen />
+            }
 
         ],
     },

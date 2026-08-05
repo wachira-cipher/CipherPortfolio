@@ -403,3 +403,61 @@ export const getProfile = async (req, res) => {
     }
 
 };
+
+export const unlock = async (req, res) => {
+
+    try {
+
+        const { password } = req.body;
+
+        if (!password) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Password is required"
+            });
+
+        }
+
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+
+        }
+
+        const validPassword = await bcrypt.compare(
+            password,
+            user.password
+        );
+
+        if (!validPassword) {
+
+            return res.status(401).json({
+                success: false,
+                message: "Incorrect password"
+            });
+
+        }
+
+        return res.json({
+            success: true,
+            message: "Unlocked successfully"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+
+    }
+
+};

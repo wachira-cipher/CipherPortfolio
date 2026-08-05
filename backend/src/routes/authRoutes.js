@@ -4,7 +4,8 @@ import {
     registerUser,
     loginUser,
     getProfile,
-    logoutUser
+    logoutUser,
+    unlock
 } from "../controllers/authController.js";
 
 
@@ -31,7 +32,11 @@ router.post(
     loginUser
 );
 
-
+router.post(
+    "/unlock",
+    protect,
+    unlock
+);
 
 // Profile
 
