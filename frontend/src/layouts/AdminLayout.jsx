@@ -31,12 +31,34 @@ const AdminLayout = () => {
         setSidebarOpen(prev => !prev);
     };
 
-
     const toggleRightSidebar = () => {
-        setRightSidebarOpen(prev => !prev);
+        setRightSidebarOpen(prev => {
+            const next = !prev;
+
+            if (next) {
+                document.body.classList.add("right-bar-enabled");
+            } else {
+                document.body.classList.remove("right-bar-enabled");
+            }
+
+            return next;
+        });
     };
 
+    useEffect(() => {
+        console.log("Right Sidebar State:", rightSidebarOpen);
 
+        if (rightSidebarOpen) {
+            console.log("ADDING right-bar-enabled");
+            document.body.classList.add("right-bar-enabled");
+        } else {
+            console.log("REMOVING right-bar-enabled");
+            document.body.classList.remove("right-bar-enabled");
+        }
+
+        console.log(document.body.className);
+
+    }, [rightSidebarOpen]);
 
     useEffect(() => {
 
@@ -72,51 +94,75 @@ const AdminLayout = () => {
 
     useEffect(() => {
 
-        console.log(
-            "AdminLayout sidebar state:",
-            sidebarOpen
-        );
+
+    if (window.innerWidth < 992) {
 
 
         if (sidebarOpen) {
 
-            document.body.classList.remove(
-                "vertical-collapsed"
+
+            document.body.classList.add(
+                "sidebar-enable"
             );
 
+
             document.body.classList.remove(
-                "sidebar-enable"
+                "vertical-collapsed"
             );
 
 
         } else {
 
-            document.body.classList.add(
-                "vertical-collapsed"
-            );
 
-            document.body.classList.add(
+            document.body.classList.remove(
                 "sidebar-enable"
             );
+
 
         }
 
 
-
-        return () => {
-
-            document.body.classList.remove(
-                "vertical-collapsed"
-            );
-
-            document.body.classList.remove(
-                "sidebar-enable"
-            );
-
-        };
+        return;
 
 
-    }, [sidebarOpen]);
+    }
+
+
+
+    // Desktop behaviour
+
+    if (sidebarOpen) {
+
+
+        document.body.setAttribute(
+            "data-sidebar-size",
+            "lg"
+        );
+
+
+        document.body.classList.remove(
+            "vertical-collapsed"
+        );
+
+
+    } else {
+
+
+        document.body.setAttribute(
+            "data-sidebar-size",
+            "sm"
+        );
+
+
+        document.body.classList.add(
+            "vertical-collapsed"
+        );
+
+
+    }
+
+
+}, [sidebarOpen]);
 
 
 
@@ -153,6 +199,7 @@ const AdminLayout = () => {
 
                 <Header
                     toggleSidebar={toggleSidebar}
+                    toggleRightSidebar={toggleRightSidebar}
                 />
 
 

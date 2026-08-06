@@ -68,7 +68,6 @@ const SidebarMenu = () => {
                         <MenuItem
                             icon="uil-home-alt"
                             title="Dashboard"
-                            badge="01"
                             badgeClass="bg-primary"
                             link="/admin/dashboard"
                         />
