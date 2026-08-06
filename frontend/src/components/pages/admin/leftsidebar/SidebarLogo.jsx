@@ -1,13 +1,19 @@
+import { Link } from "react-router-dom";
+
+
 const SidebarLogo = () => {
     return (
         <div className="navbar-brand-box">
 
-            <a href="index.html" className="logo logo-dark">
+            <Link
+                to="/admin/dashboard"
+                className="logo logo-dark"
+            >
 
                 <span className="logo-sm">
                     <img
                         src="/assets/auth/images/logo-sm.png"
-                        alt=""
+                        alt="Logo"
                         height="22"
                     />
                 </span>
@@ -16,20 +22,24 @@ const SidebarLogo = () => {
                 <span className="logo-lg">
                     <img
                         src="/assets/auth/images/logo-dark.png"
-                        alt=""
+                        alt="Logo"
                         height="20"
                     />
                 </span>
 
-            </a>
+            </Link>
 
 
-            <a href="index.html" className="logo logo-light">
+
+            <Link
+                to="/admin/dashboard"
+                className="logo logo-light"
+            >
 
                 <span className="logo-sm">
                     <img
                         src="/assets/auth/images/logo-sm.png"
-                        alt=""
+                        alt="Logo"
                         height="22"
                     />
                 </span>
@@ -38,15 +48,16 @@ const SidebarLogo = () => {
                 <span className="logo-lg">
                     <img
                         src="/assets/auth/images/logo-light.png"
-                        alt=""
+                        alt="Logo"
                         height="20"
                     />
                 </span>
 
-            </a>
+            </Link>
 
         </div>
     );
 };
+
 
 export default SidebarLogo;

@@ -1,43 +1,63 @@
+import { Link } from "react-router-dom";
+
+
 const Logo = () => {
     return (
         <div className="navbar-brand-box">
-            <a href="index.html" className="logo logo-dark">
+
+            <Link
+                to="/admin/dashboard"
+                className="logo logo-dark"
+            >
+
                 <span className="logo-sm">
                     <img
-                        src="assets/auth/images/logo-sm.png"
-                        alt=""
+                        src="/assets/auth/images/logo-sm.png"
+                        alt="Logo"
                         height="22"
                     />
                 </span>
 
+
                 <span className="logo-lg">
                     <img
-                        src="assets/auth/images/logo-dark.png"
-                        alt=""
+                        src="/assets/auth/images/logo-dark.png"
+                        alt="Logo"
                         height="20"
                     />
                 </span>
-            </a>
 
-            <a href="index.html" className="logo logo-light">
+            </Link>
+
+
+
+            <Link
+                to="/admin/dashboard"
+                className="logo logo-light"
+            >
+
                 <span className="logo-sm">
                     <img
-                        src="assets/auth/images/logo-sm.png"
-                        alt=""
+                        src="/assets/auth/images/logo-sm.png"
+                        alt="Logo"
                         height="22"
                     />
                 </span>
 
+
                 <span className="logo-lg">
                     <img
-                        src="assets/auth/images/logo-light.png"
-                        alt=""
+                        src="/assets/auth/images/logo-light.png"
+                        alt="Logo"
                         height="20"
                     />
                 </span>
-            </a>
+
+            </Link>
+
         </div>
     );
 };
+
 
 export default Logo;

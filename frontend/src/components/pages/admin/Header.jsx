@@ -1,15 +1,15 @@
 import Logo from "./header/Logo";
-import SearchBar from "./header/SearchBar";
-import MobileSearch from "./header/MobileSearch";
-import LanguageDropdown from "./header/LanguageDropdown";
-import AppsDropdown from "./header/AppsDropdown";
+//import SearchBar from "./header/SearchBar";
+//import MobileSearch from "./header/MobileSearch";
+//import LanguageDropdown from "./header/LanguageDropdown";
+//import AppsDropdown from "./header/AppsDropdown";
 import FullscreenButton from "./header/FullscreenButton";
 import Notifications from "./header/Notifications";
 import UserDropdown from "./header/UserDropdown";
 import SettingsButton from "./header/SettingsButton";
 
 
-const Header = ({ toggleSidebar }) => {
+const Header = ({ toggleSidebar, toggleRightSidebar }) => {
 
 
     return (
@@ -36,7 +36,7 @@ const Header = ({ toggleSidebar }) => {
 
 
 
-                    <SearchBar />
+                   {/* <SearchBar />*/}
 
 
                 </div>
@@ -46,11 +46,11 @@ const Header = ({ toggleSidebar }) => {
 
                 <div className="d-flex">
 
-                    <MobileSearch />
+                   {/* <MobileSearch />
 
                     <LanguageDropdown />
 
-                    <AppsDropdown />
+                    <AppsDropdown />*/}
 
                     <FullscreenButton />
 
@@ -58,7 +58,11 @@ const Header = ({ toggleSidebar }) => {
 
                     <UserDropdown />
 
-                    <SettingsButton />
+                    <SettingsButton
+                        toggleRightSidebar={
+                            toggleRightSidebar
+                        }
+                    />
 
                 </div>
 
