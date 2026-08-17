@@ -3,59 +3,51 @@ import { useState } from "react";
 import "../../assets/styles/header.css";
 import siteConfig from "../../config/site.config";
 
-
 export default function Header() {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    return (
+  return (
+    <header
+      id="header"
+      className="header d-flex align-items-center light-background sticky-top"
+    >
+      <div className="container position-relative d-flex align-items-center justify-content-between">
+        {/* Logo */}
+        <Link to="/" className="logo d-flex align-items-end">
+          {/* <h1 className="sitename">Blogit</h1>*/}
+          <img
+            src="/assets/portfolio/img/logo.png"
+            title="cipherportfolio"
+            alt=""
+          />
+          <span></span>
+        </Link>
 
-        <header
-            id="header"
-            className="header d-flex align-items-center light-background sticky-top"
-        >
+        <nav id="navmenu" className="navmenu">
+          <ul>
+            <li>
+              <Link to="/" className="active">
+                Home
+              </Link>
+            </li>
 
-            <div className="container position-relative d-flex align-items-center justify-content-between">
+            <li>
+              <Link to="/about">About</Link>
+            </li>
 
+            <li>
+              <Link to="/resume">Resume</Link>
+            </li>
 
-                <nav id="navmenu" className="navmenu">
+            <li>
+              <Link to="/services">Services</Link>
+            </li>
 
-                    <ul>
+            <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
 
-                        <li>
-                            <Link to="/" className="active">
-                                Home
-                            </Link>
-                        </li>
-
-
-                        <li>
-                            <Link to="/about">
-                                About
-                            </Link>
-                        </li>
-
-
-                        <li>
-                            <Link to="/resume">
-                                Resume
-                            </Link>
-                        </li>
-
-
-                        <li>
-                            <Link to="/services">
-                                Services
-                            </Link>
-                        </li>
-
-
-                        <li>
-                            <Link to="/portfolio">
-                                Portfolio
-                            </Link>
-                        </li>
-
-                        {/*
+            {/*
                         <li className="dropdown">
 
                             <a href="#">
@@ -139,109 +131,76 @@ export default function Header() {
                         </li>
 
 */}
-                        <li>
-                            <Link to="/contact">
-                                Contact
-                            </Link>
-                        </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+          </ul>
 
+          <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
 
-                    </ul>
+        <div className="account-dropdown">
+          <button className="account-icon" onClick={() => setOpen(!open)}>
+            <i className="bi bi-person-circle"></i>
+          </button>
 
+          <ul className={`dropdown-menu ${open ? "show" : ""}`}>
+            <li>
+              <a className="dropdown-item" href="/auth/login">
+                <i className="bi bi-box-arrow-in-right"></i>
+                Login
+              </a>
+            </li>
 
-                    <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            <li>
+              <a className="dropdown-item" href="/auth/register">
+                <i className="bi bi-person-plus"></i>
+                Sign Up
+              </a>
+            </li>
+          </ul>
+        </div>
 
+        <div className="header-social-links"></div>
 
-                </nav>
+        <div className="header-social-links">
+          <a
+            href={siteConfig.socialLinks.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="twitter"
+          >
+            <i className="bi bi-twitter-x"></i>
+          </a>
 
-                <div className="account-dropdown">
+          <a
+            href={siteConfig.socialLinks.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="facebook"
+          >
+            <i className="bi bi-facebook"></i>
+          </a>
 
-                    <button
-                        className="account-icon"
-                        onClick={() => setOpen(!open)}
-                    >
-                        <i className="bi bi-person-circle"></i>
-                    </button>
+          <a
+            href={siteConfig.socialLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="instagram"
+          >
+            <i className="bi bi-instagram"></i>
+          </a>
 
-
-                    <ul className={`dropdown-menu ${open ? "show" : ""}`}>
-
-                        <li>
-                            <a className="dropdown-item" href="/auth/login">
-                                <i className="bi bi-box-arrow-in-right"></i>
-                                Login
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a className="dropdown-item" href="/auth/register">
-                                <i className="bi bi-person-plus"></i>
-                                Sign Up
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-                <div className="header-social-links">
-
-
-
-                </div>
-
-                <div className="header-social-links">
-
-                    <a
-                        href={siteConfig.socialLinks.twitter}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="twitter"
-                    >
-                        <i className="bi bi-twitter-x"></i>
-                    </a>
-
-
-                    <a
-                        href={siteConfig.socialLinks.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="facebook"
-                    >
-                        <i className="bi bi-facebook"></i>
-                    </a>
-
-
-                    <a
-                        href={siteConfig.socialLinks.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="instagram"
-                    >
-                        <i className="bi bi-instagram"></i>
-                    </a>
-
-
-                    <a
-                        href={siteConfig.socialLinks.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="linkedin"
-                    >
-                        <i className="bi bi-linkedin"></i>
-                    </a>
-
-                </div>
-
-
-
-
-            </div>
-
-
-        </header>
-
-    );
-
+          <a
+            href={siteConfig.socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="linkedin"
+          >
+            <i className="bi bi-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+  );
 }
