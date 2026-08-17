@@ -1,21 +1,18 @@
 const siteConfig = {
-    name: "CipherPortfolio",
+  name: "CipherPortfolio",
 
-    owner: "Jonathan Wachira",
+  owner: "Jonathan Wachira",
 
-    designer: "Cybersphere Systems",
+  designer: "CybersphereSystems",
 
-    designerUrl: "https://www.cyberspheresystems.com",
+  designerUrl: "https://www.cyberspheresystems.com",
 
-
-    socialLinks: {
-        twitter: "https://x.com/",
-        facebook: "https://facebook.com/",
-        instagram: "https://instagram.com/",
-        linkedin: "https://linkedin.com/"
-    }
-
+  socialLinks: {
+    twitter: "https://x.com/",
+    facebook: "https://facebook.com/",
+    instagram: "https://instagram.com/",
+    linkedin: "https://linkedin.com/",
+  },
 };
-
 
 export default siteConfig;

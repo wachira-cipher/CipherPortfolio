@@ -1,164 +1,96 @@
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
-
+import AuthFooter from "../components/pages/admin/AuthFooter";
 
 export default function AuthLayout() {
+  useEffect(() => {
+    // =========================
+    // Body class
+    // =========================
 
+    document.body.classList.add("authentication-bg");
 
-    useEffect(() => {
+    // =========================
+    // Auth CSS
+    // =========================
 
+    const cssFiles = [
+      "/assets/auth/css/bootstrap.min.css",
 
-        // =========================
-        // Body class
-        // =========================
+      "/assets/auth/css/icons.min.css",
 
-        document.body.classList.add(
-            "authentication-bg"
-        );
+      "/assets/auth/css/app.min.css",
+    ];
 
+    const addedCss = cssFiles.map((file) => {
+      const link = document.createElement("link");
 
+      link.rel = "stylesheet";
 
-        // =========================
-        // Auth CSS
-        // =========================
+      link.href = file;
 
-        const cssFiles = [
+      link.dataset.auth = "true";
 
-            "/assets/auth/css/bootstrap.min.css",
+      document.head.appendChild(link);
 
-            "/assets/auth/css/icons.min.css",
+      return link;
+    });
 
-            "/assets/auth/css/app.min.css"
+    // =========================
+    // Auth JS
+    // =========================
 
-        ];
+    const jsFiles = [
+      "/assets/auth/libs/jquery/jquery.min.js",
 
+      "/assets/auth/libs/bootstrap/js/bootstrap.bundle.min.js",
 
+      "/assets/auth/libs/metismenu/metisMenu.min.js",
 
-        const addedCss = cssFiles.map((file) => {
+      "/assets/auth/libs/simplebar/simplebar.min.js",
 
+      "/assets/auth/libs/node-waves/waves.min.js",
 
-            const link = document.createElement("link");
+      "/assets/auth/libs/waypoints/lib/jquery.waypoints.min.js",
 
+      "/assets/auth/libs/jquery.counterup/jquery.counterup.min.js",
 
-            link.rel = "stylesheet";
+      "/assets/auth/js/app.js",
+    ];
 
-            link.href = file;
+    const addedScripts = jsFiles.map((file) => {
+      const script = document.createElement("script");
 
-            link.dataset.auth = "true";
+      script.src = file;
 
+      script.dataset.auth = "true";
 
-            document.head.appendChild(link);
+      document.body.appendChild(script);
 
+      return script;
+    });
 
-            return link;
+    // =========================
+    // Cleanup when leaving auth
+    // =========================
 
+    return () => {
+      document.body.classList.remove("authentication-bg");
 
-        });
+      addedCss.forEach((link) => {
+        link.remove();
+      });
 
+      addedScripts.forEach((script) => {
+        script.remove();
+      });
+    };
+  }, []);
 
-
-
-
-
-        // =========================
-        // Auth JS
-        // =========================
-
-        const jsFiles = [
-
-
-            "/assets/auth/libs/jquery/jquery.min.js",
-
-            "/assets/auth/libs/bootstrap/js/bootstrap.bundle.min.js",
-
-            "/assets/auth/libs/metismenu/metisMenu.min.js",
-
-            "/assets/auth/libs/simplebar/simplebar.min.js",
-
-            "/assets/auth/libs/node-waves/waves.min.js",
-
-            "/assets/auth/libs/waypoints/lib/jquery.waypoints.min.js",
-
-            "/assets/auth/libs/jquery.counterup/jquery.counterup.min.js",
-
-            "/assets/auth/js/app.js"
-
-
-        ];
-
-
-
-        const addedScripts = jsFiles.map((file) => {
-
-
-            const script = document.createElement(
-                "script"
-            );
-
-
-            script.src = file;
-
-            script.dataset.auth = "true";
-
-
-            document.body.appendChild(script);
-
-
-            return script;
-
-
-        });
-
-
-
-
-
-
-
-        // =========================
-        // Cleanup when leaving auth
-        // =========================
-
-        return () => {
-
-
-            document.body.classList.remove(
-                "authentication-bg"
-            );
-
-
-
-            addedCss.forEach((link) => {
-
-
-                link.remove();
-
-
-            });
-
-
-
-            addedScripts.forEach((script) => {
-
-
-                script.remove();
-
-
-            });
-
-
-        };
-
-
-    }, []);
-
-
-
-
-    return (
-
-        <Outlet />
-
-    );
-
+  return (
+    <div className="account-pages my-5 pt-sm-5">
+      <Outlet />
+      <AuthFooter />
+    </div>
+  );
 }

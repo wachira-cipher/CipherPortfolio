@@ -1,6 +1,53 @@
+.header .container .logo{
+     max-height: 40px;
+  margin-right: 10px;
+  margin-left: -250px;
+}
+.header .container .logo {
+  text-decoration: none;
+}
+
+.header .container .logo img {
+  max-height: 40px;
+  margin-right: 10px;
+}
+
+.header .container .logo .sitename {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  margin: 0;
+}
+
+.header .container .logo span {
+  color: var(--accent-color);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.footer .footer-about .logo {
+  line-height: 1;
+  margin-bottom: 25px;
+}
+
+.footer .footer-about .logo img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.footer .footer-about .logo span {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
 /* ==========================================
    Header Account Dropdown
 ========================================== */
+
 
 .header-account {
     display: flex;
@@ -28,10 +75,10 @@
 
     background-color: var(--background-color);
 
-    font-size: 1.45rem;
+    font-size: 1.01rem;
 
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
 
     display: flex;
     align-items: center;
